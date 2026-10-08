@@ -52,13 +52,22 @@ npm run dev
 ブラウザで [http://localhost:3000](http://localhost:3000) を開いてサイトを確認できます。
 
 ### 3. Decap CMS 管理画面の利用
-- [http://localhost:3000/admin/](http://localhost:3000/admin/) にアクセスします。
-- ローカル環境で管理画面を動作させる場合:
+- **ローカル環境**:
+  別ターミナルで `npx decap-server` を起動すると、ログイン画面をスキップして直接ローカルファイルの編集・保存が行えます。
   ```bash
   npx decap-server
   ```
-  を別ターミナルで起動することで、ローカルファイルへの書き込みが可能になります。
-- 本番環境（GitHub / Vercel / Netlify）では、GitHub OAuth または Netlify Identity を連携して管理画面からコミット・公開が行われます。
+  ブラウザで [http://localhost:3000/admin/](http://localhost:3000/admin/) にアクセスします。
+
+- **Vercel 本番環境（GitHubログイン）**:
+  Next.jsに内蔵されたOAuth Route Handler（`/api/auth` & `/api/callback`）により、外部認証サーバー不要で動作します。
+  1. GitHub（Settings > Developer Settings > OAuth Apps）で「New OAuth App」を作成:
+     - **Homepage URL**: `https://oloroso.vercel.app`
+     - **Authorization callback URL**: `https://oloroso.vercel.app/api/callback`
+  2. 発行された `Client ID` と `Client Secret` を、Vercelダッシュボードの **Project Settings > Environment Variables** に登録:
+     - `GITHUB_CLIENT_ID`: （Client ID）
+     - `GITHUB_CLIENT_SECRET`: （Client Secret）
+  3. [https://oloroso.vercel.app/admin/](https://oloroso.vercel.app/admin/) から「Login with GitHub」をクリックするとログインが完了し、CMSから直接GitHubへのコミット・公開が可能になります。
 
 ### 4. プロダクションビルド
 ```bash

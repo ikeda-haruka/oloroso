@@ -2,7 +2,8 @@ backend:
   name: github
   repo: ikeda-haruka/oloroso
   branch: main
-  base_url: https://github.com
+  base_url: https://oloroso.vercel.app
+  auth_endpoint: api/auth
 
 # ローカル環境でのデバッグ用 (npx decap-server 起動時)
 local_backend: true
