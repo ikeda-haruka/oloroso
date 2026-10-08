@@ -145,24 +145,25 @@ export default function AboutPage() {
               <div className="space-y-4 pt-2">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-gray-900 border-b pb-2 flex items-center gap-2">
                   <Award className="w-4 h-4 text-[#801336]" />
-                  主な経歴・受賞歴
+                  主な活動経歴・実績
+                  <span className="text-[10px] text-gray-600 font-normal ml-auto">※ポートフォリオ用架空設定</span>
                 </h4>
-                <ul className="space-y-2.5 text-xs text-gray-700">
-                  <li className="flex items-start gap-2">
-                    <span className="font-semibold text-[#801336] shrink-0">2012年〜</span>
-                    <span>スペイン・アンダルシア地方ヘレス・デ・ラ・フロンテーラへ長期留学。マヌエラ・カルピオ、メルセデス・ルイス等の名匠に師事。</span>
+                <ul className="space-y-3 text-xs text-gray-700">
+                  <li className="flex items-start gap-3">
+                    <span className="font-semibold text-[#801336] shrink-0 w-20">研鑽・渡欧</span>
+                    <span>幼少よりクラシックバレエに親しみ、後にフラメンコへ転向。本場スペイン・アンダルシア地方（ヘレス、セビージャ等）へ渡り、現地の舞踊家たちから生のコンパス（リズム）とカンテ（歌）の神髄を体得。</span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <span className="font-semibold text-[#801336] shrink-0">2016年</span>
-                    <span>日本フラメンコ協会「新人公演」において奨励賞を受賞。国内外のタブラオ、劇場公演に多数出演。</span>
+                  <li className="flex items-start gap-3">
+                    <span className="font-semibold text-[#801336] shrink-0 w-20">舞台・出演</span>
+                    <span>帰国後、国内外のタブラオ（劇場型レストラン）や各種フラメンコフェスティバルに多数出演。ソロ・群舞双方で豊かな表現力を持つバイラオーラとして舞台経験を重ねる。</span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <span className="font-semibold text-[#801336] shrink-0">2019年</span>
-                    <span>東京・中目黒にフラメンコスタジオ「Estudio Oloroso」を創設。</span>
+                  <li className="flex items-start gap-3">
+                    <span className="font-semibold text-[#801336] shrink-0 w-20">スタジオ設立</span>
+                    <span>東京・中目黒にフラメンコスタジオ「Estudio Oloroso」を開設。年齢や経験を問わず、一人ひとりの身体の使い方と感情表現に寄り添う指導方針を確立。</span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <span className="font-semibold text-[#801336] shrink-0">現在</span>
-                    <span>後進の育成に注力する傍ら、スペイン人アーティスト招聘公演の企画・出演を継続中。</span>
+                  <li className="flex items-start gap-3">
+                    <span className="font-semibold text-[#801336] shrink-0 w-20">現在</span>
+                    <span>スタジオでの後進育成に情熱を注ぐ傍ら、自主公演の企画や各種ワークショップ、生演奏ライブへの出演など精力的に活動を展開している。</span>
                   </li>
                 </ul>
               </div>
