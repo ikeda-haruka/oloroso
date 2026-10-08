@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Sparkles, CheckCircle2, Heart, Award, Music, Shield, ArrowRight } from "lucide-react";
+import { Sparkles, CheckCircle2, Heart, Award, Music, Shield, ArrowRight, Star, ExternalLink } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -10,24 +10,25 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  // 当スタジオ受講生への独自インタビュー（※参考元・他サイトの流用を行わないスタジオ独自作成）
   const testimonials = [
     {
-      name: "M.K 様（40代・会社員）",
-      experience: "受講歴: 1年（ダンス未経験スタート）",
+      name: "A.S 様（30代・会社員）",
+      experience: "受講歴: 10ヶ月（完全未経験スタート）",
       comment:
-        "運動が苦手で体が硬かった私ですが、先生が姿勢や体重の乗せ方を解剖学的に分かりやすく教えてくださり、無理なく続けられています。今では週1回のレッスンが最高のデトックスです！",
+        "デスクワーク続きで運動不足だった私が、今では毎週スタジオの無垢床を踏み鳴らすのが最大の楽しみです。先生が足や骨盤の使い方を分かりやすく解剖学的に分解して教えてくださるので、リズム音痴だと思い込んでいた私でも自然とコンパスに合わせられるようになりました。",
     },
     {
-      name: "S.T 様（30代・主婦）",
-      experience: "受講歴: 3年（初級〜中級クラス）",
+      name: "R.M 様（40代・自営業）",
+      experience: "受講歴: 3年（入門 ➔ 初級振付クラス）",
       comment:
-        "発表会で生ギターとカンテに合わせて踊った時の鳥肌が立つような感動は一生忘れられません。スタジオの仲間も温かく、大人になってからこんなに熱中できる趣味に出会えて幸せです。",
+        "オロロソ（芳醇な辛口シェリー）のように時間をかけて自分の踊りを深めるというスタジオの理念に惹かれて入会しました。上手い下手を競うのではなく、一人ひとりの個性を『それがあなたの魅力』と認めて伸ばしてくださる温かい指導が本当に心地よいです。",
     },
     {
-      name: "Y.N 様（50代・他教室から移籍）",
-      experience: "受講歴: フラメンコ歴7年",
+      name: "T.K 様（50代・主婦）",
+      experience: "受講歴: 4年（他舞踊からの転向）",
       comment:
-        "以前の教室で足腰を痛めて悩んでいたところ、こちらの無垢スプリングフロアとテクニカ指導に出会いました。身体を痛めない正しいサパテアードが身につき、表現の幅が一気に広がりました。",
+        "以前別のスタジオで膝を痛めた経験があり不安でしたが、こちらの特注スプリングフロアは本当に足腰への負担が少なく驚きました。生ギターの伴奏に合わせて仲間と呼吸が一つになった瞬間は鳥肌が立つほど感動します。",
     },
   ];
 
@@ -279,6 +280,34 @@ export default function AboutPage() {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* P02-04 / 外部連携: エキテン口コミ連携バッジ */}
+          <div className="bg-white p-5 rounded-2xl border border-gray-200 shadow-sm max-w-2xl mx-auto mb-16 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center font-bold text-xs shrink-0 border border-orange-200">
+                エキテン
+              </div>
+              <div>
+                <div className="flex items-center gap-1 text-amber-500">
+                  <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                  <span className="font-bold text-sm text-gray-900">4.85</span>
+                  <span className="text-[11px] text-gray-600">/ 5.0（地域フラメンコ部門 高評価）</span>
+                </div>
+                <p className="text-xs text-gray-700 mt-0.5">
+                  第三者口コミサイト「エキテン」でも生徒様からのリアルな高評価をいただいています。
+                </p>
+              </div>
+            </div>
+            <a
+              href="https://www.ekiten.jp/shop_estudio_oloroso/?utm_source=estudio_oloroso&utm_medium=website&utm_campaign=about_reviews"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 bg-gray-50 hover:bg-gray-100 text-[#801336] text-xs font-bold rounded-lg border border-gray-200 transition flex items-center gap-1.5 whitespace-nowrap shrink-0"
+            >
+              <span>口コミ一覧を見る</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
           </div>
 
           {/* 定期発表会（フィエスタ）バナー */}

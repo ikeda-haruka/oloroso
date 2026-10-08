@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Sparkles, CheckCircle2, ArrowRight, Clock, Target, Users, BookOpen } from "lucide-react";
+import ClassVideoFacade from "@/components/ClassVideoFacade";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -199,6 +200,9 @@ export default function ClassesPage() {
               <Image src={cls.image} alt={cls.title} fill className="object-cover" />
               <div className="absolute top-4 left-4 bg-[#801336] text-white text-xs font-bold px-3 py-1 rounded-full shadow">
                 {cls.badge}
+              </div>
+              <div className="absolute bottom-4 right-4 z-10">
+                <ClassVideoFacade title={cls.title} classNameId={cls.id} />
               </div>
             </div>
 

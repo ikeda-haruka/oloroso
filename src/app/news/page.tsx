@@ -262,7 +262,7 @@ export default function NewsIndexPage() {
               </p>
 
               <a
-                href="https://www.ekiten.jp"
+                href="https://www.ekiten.jp/shop_estudio_oloroso/?utm_source=estudio_oloroso&utm_medium=website&utm_campaign=news_reviews"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full py-2.5 px-4 bg-amber-600 hover:bg-amber-700 text-white font-bold text-center rounded-xl text-xs block transition shadow-sm"

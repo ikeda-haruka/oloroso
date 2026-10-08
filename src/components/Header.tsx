@@ -99,20 +99,29 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* 右側CTAボタン */}
-          <div className="hidden sm:flex items-center gap-3">
+          {/* スライド4要件: ヘッダー追従エリアにスケジュール & 休講・代講情報を独立配置 */}
+          <div className="hidden sm:flex items-center gap-2.5">
+            <Link
+              href="/news"
+              className="px-3 py-1.5 text-xs font-medium text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-200 rounded-lg transition flex items-center gap-1"
+              title="最新の休講・代講情報"
+            >
+              <AlertCircle className="w-3.5 h-3.5 text-amber-700" />
+              <span>休講・代講</span>
+            </Link>
             <Link
               href="/schedule"
-              className="px-3.5 py-2 text-xs font-medium text-[#801336] border border-[#801336]/40 rounded hover:bg-[#801336]/5 transition"
+              className="px-3 py-1.5 text-xs font-medium text-[#801336] bg-[#801336]/5 hover:bg-[#801336]/10 border border-[#801336]/30 rounded-lg transition flex items-center gap-1"
             >
-              スケジュール
+              <Calendar className="w-3.5 h-3.5" />
+              <span>スケジュール</span>
             </Link>
             <Link
               href="/contact"
-              className="px-4 py-2 text-xs font-semibold text-white bg-gradient-to-r from-[#801336] to-[#721B29] hover:from-[#721B29] hover:to-[#580F1E] rounded shadow-sm hover:shadow-md transition-all flex items-center gap-1.5"
+              className="px-3.5 py-1.5 text-xs font-semibold text-white bg-gradient-to-r from-[#801336] to-[#721B29] hover:from-[#721B29] hover:to-[#580F1E] rounded-lg shadow-sm hover:shadow-md transition-all flex items-center gap-1.5"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#E8C888] animate-pulse"></span>
-              体験レッスン予約
+              体験予約
             </Link>
           </div>
 
@@ -144,7 +153,32 @@ export default function Header() {
                 </button>
               </div>
 
-              <div className="mt-6 flex flex-col space-y-4">
+              {/* 生徒専用クイックアクセスブロック */}
+              <div className="mt-4 p-3 bg-amber-50 rounded-xl border border-amber-200">
+                <span className="text-[10px] font-bold text-amber-900 tracking-wider uppercase block mb-1.5">
+                  生徒専用メニュー
+                </span>
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <Link
+                    href="/news"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="p-2 bg-white rounded-lg border border-amber-200 text-amber-900 font-bold flex items-center justify-center gap-1 shadow-xs"
+                  >
+                    <AlertCircle className="w-3.5 h-3.5 text-amber-700" />
+                    <span>休講・代講</span>
+                  </Link>
+                  <Link
+                    href="/schedule"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="p-2 bg-white rounded-lg border border-amber-200 text-[#801336] font-bold flex items-center justify-center gap-1 shadow-xs"
+                  >
+                    <Calendar className="w-3.5 h-3.5" />
+                    <span>スケジュール</span>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="mt-4 flex flex-col space-y-3">
                 {navLinks.map((link) => (
                   <Link
                     key={link.name}

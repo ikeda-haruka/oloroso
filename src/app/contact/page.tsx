@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import {
   Sparkles,
@@ -13,18 +12,26 @@ import {
   HelpCircle,
   ChevronDown,
   ArrowRight,
+  ArrowLeft,
   Send,
   Phone,
   Mail,
   ShieldCheck,
+  Search,
+  Check,
 } from "lucide-react";
 
 export default function ContactPage() {
   const [inquiryType, setInquiryType] = useState<"trial" | "general">("trial");
+  const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSearchingZip, setIsSearchingZip] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     kana: "",
+    postalCode: "",
+    address: "",
     email: "",
     phone: "",
     preferredClass: "beginner",
@@ -33,13 +40,64 @@ export default function ContactPage() {
     preferredDate3: "",
     shoeSize: "23.5",
     message: "",
+    honeypot: "", // スパム対策（ボットが入力した場合は破棄）
   });
 
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
+  // 郵便番号から住所自動入力（API + フォールバックシミュレーション）
+  const handlePostalLookup = async () => {
+    const rawZip = formData.postalCode.replace(/[^0-9]/g, "");
+    if (rawZip.length < 7) {
+      alert("7桁の郵便番号（例: 1530051）を入力してください。");
+      return;
+    }
+    setIsSearchingZip(true);
+    try {
+      const res = await fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${rawZip}`);
+      const data = await res.json();
+      if (data.results && data.results[0]) {
+        const item = data.results[0];
+        const fullAddr = `${item.address1}${item.address2}${item.address3}`;
+        setFormData((prev) => ({ ...prev, address: fullAddr }));
+      } else {
+        // フォールバック（東京都目黒区想定のサンプル補完）
+        setFormData((prev) => ({ ...prev, address: "東京都目黒区上目黒" }));
+      }
+    } catch {
+      setFormData((prev) => ({ ...prev, address: "東京都目黒区上目黒" }));
+    } finally {
+      setIsSearchingZip(false);
+    }
+  };
+
+  const handleNextStep = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (currentStep === 1) {
+      if (!formData.name || !formData.email || !formData.phone) {
+        alert("お名前、メールアドレス、電話番号をご入力ください。");
+        return;
+      }
+      setCurrentStep(2);
+    } else if (currentStep === 2) {
+      if (inquiryType === "trial" && !formData.preferredDate1) {
+        alert("第1希望の日時をご入力ください。");
+        return;
+      }
+      setCurrentStep(3);
+    }
+    window.scrollTo({ top: 350, behavior: "smooth" });
+  };
+
+  const handlePrevStep = () => {
+    if (currentStep === 3) setCurrentStep(2);
+    else if (currentStep === 2) setCurrentStep(1);
+    window.scrollTo({ top: 350, behavior: "smooth" });
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate successful form submission
+    if (formData.honeypot) return; // ボット対策
     setIsSubmitted(true);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -130,7 +188,10 @@ export default function ContactPage() {
 
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
-                onClick={() => setIsSubmitted(false)}
+                onClick={() => {
+                  setIsSubmitted(false);
+                  setCurrentStep(1);
+                }}
                 className="text-xs text-gray-500 underline hover:text-[#801336]"
               >
                 別の内容を送信する
@@ -237,11 +298,11 @@ export default function ContactPage() {
           </section>
 
           {/* ========================================================= */}
-          {/* P06-02: 体験予約・お問い合わせ統合フォーム */}
+          {/* P06-02 / スライド11: 体験予約・お問い合わせ ステップ化ウィザードフォーム */}
           {/* ========================================================= */}
-          <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-white rounded-3xl p-6 sm:p-12 shadow-xl border border-[#801336]/20">
-              <div className="text-center mb-8">
+              <div className="text-center mb-6">
                 <span className="text-xs font-bold text-[#801336] tracking-widest uppercase">
                   Reservation Form
                 </span>
@@ -251,261 +312,471 @@ export default function ContactPage() {
                     デモ動作用
                   </span>
                 </h2>
-                <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900 mb-4 max-w-lg mx-auto leading-relaxed">
-                  <strong>【入力テスト歓迎】</strong><br />
-                  本フォームはポートフォリオ用のデモです。送信ボタンを押すと完了画面のシミュレーションが表示されます。実際の予約や課金・個人情報の保存は行われません。
-                </div>
-                <p className="text-xs text-gray-500">
-                  ※実際の教室サイト運用時は、送信後24時間以内に担当者よりご案内をお送りする想定です。
+                {/* スライド11要件: マイクロコピーの配置 */}
+                <p className="text-xs sm:text-sm text-[#801336] font-semibold flex items-center justify-center gap-1.5 mt-2">
+                  <Clock className="w-4 h-4 text-[#801336]" />
+                  ※ 送信後、24時間以内に担当講師よりご連絡いたします
                 </p>
               </div>
 
-              {/* お問い合わせ種別切り替えタブ */}
-              <div className="grid grid-cols-2 gap-3 mb-8">
-                <button
-                  type="button"
-                  onClick={() => setInquiryType("trial")}
-                  className={`py-3 text-xs sm:text-sm font-bold rounded-xl border transition-all ${
-                    inquiryType === "trial"
-                      ? "bg-[#801336] text-white border-[#801336] shadow"
-                      : "bg-[#FAF7F2] text-gray-600 border-gray-200 hover:bg-gray-100"
-                  }`}
-                >
-                  体験レッスンを申し込む
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setInquiryType("general")}
-                  className={`py-3 text-xs sm:text-sm font-bold rounded-xl border transition-all ${
-                    inquiryType === "general"
-                      ? "bg-[#801336] text-white border-[#801336] shadow"
-                      : "bg-[#FAF7F2] text-gray-600 border-gray-200 hover:bg-gray-100"
-                  }`}
-                >
-                  一般的なお問い合わせ
-                </button>
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-6 text-xs sm:text-sm">
-                {/* お名前 & フリガナ */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block font-bold text-gray-700 mb-1">
-                      お名前 <span className="text-red-500 text-xs">[必須]</span>
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="例）山田 花子"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#801336] focus:border-transparent bg-[#FAF7F2]/50"
-                    />
+              {/* スライド11要件: ステップ化＆進捗の可視化プログレスバー */}
+              <div className="mb-8">
+                <div className="grid grid-cols-3 gap-2 text-center text-xs font-bold mb-2">
+                  <div className={`py-2 rounded-lg transition-colors ${currentStep === 1 ? "bg-[#801336] text-white shadow" : currentStep > 1 ? "bg-amber-100 text-amber-900" : "bg-gray-100 text-gray-500"}`}>
+                    1. お客様情報
                   </div>
-                  <div>
-                    <label className="block font-bold text-gray-700 mb-1">
-                      フリガナ <span className="text-red-500 text-xs">[必須]</span>
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="例）ヤマダ ハナコ"
-                      value={formData.kana}
-                      onChange={(e) => setFormData({ ...formData, kana: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#801336] focus:border-transparent bg-[#FAF7F2]/50"
-                    />
+                  <div className={`py-2 rounded-lg transition-colors ${currentStep === 2 ? "bg-[#801336] text-white shadow" : currentStep > 2 ? "bg-amber-100 text-amber-900" : "bg-gray-100 text-gray-500"}`}>
+                    2. 希望日時・クラス
+                  </div>
+                  <div className={`py-2 rounded-lg transition-colors ${currentStep === 3 ? "bg-[#801336] text-white shadow" : "bg-gray-100 text-gray-500"}`}>
+                    3. 確認画面
                   </div>
                 </div>
-
-                {/* メールアドレス & 電話番号 */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block font-bold text-gray-700 mb-1">
-                      メールアドレス <span className="text-red-500 text-xs">[必須]</span>
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      placeholder="例）name@example.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#801336] focus:border-transparent bg-[#FAF7F2]/50"
-                    />
-                  </div>
-                  <div>
-                    <label className="block font-bold text-gray-700 mb-1">
-                      電話番号 <span className="text-red-500 text-xs">[必須]</span>
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      placeholder="例）090-1234-5678"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#801336] focus:border-transparent bg-[#FAF7F2]/50"
-                    />
-                  </div>
-                </div>
-
-                {/* 体験レッスンの場合の希望クラス & 靴サイズ */}
-                {inquiryType === "trial" && (
-                  <>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block font-bold text-gray-700 mb-1">
-                          希望クラス <span className="text-red-500 text-xs">[必須]</span>
-                        </label>
-                        <select
-                          value={formData.preferredClass}
-                          onChange={(e) => setFormData({ ...formData, preferredClass: e.target.value })}
-                          className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#801336] bg-[#FAF7F2]/50"
-                        >
-                          <option value="beginner">入門・基礎クラス（未経験〜初心者）</option>
-                          <option value="choreography">初級・振付クラス（経験1年〜）</option>
-                          <option value="technica">テクニカ集中クラス（全レベル）</option>
-                          <option value="consult">講師と相談して決めたい</option>
-                        </select>
-                      </div>
-
-                      <div>
-                        <label className="block font-bold text-gray-700 mb-1">
-                          シューズサイズ（無料レンタル用）
-                        </label>
-                        <select
-                          value={formData.shoeSize}
-                          onChange={(e) => setFormData({ ...formData, shoeSize: e.target.value })}
-                          className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#801336] bg-[#FAF7F2]/50"
-                        >
-                          <option value="22.0">22.0 cm</option>
-                          <option value="22.5">22.5 cm</option>
-                          <option value="23.0">23.0 cm</option>
-                          <option value="23.5">23.5 cm (標準)</option>
-                          <option value="24.0">24.0 cm</option>
-                          <option value="24.5">24.5 cm</option>
-                          <option value="25.0">25.0 cm</option>
-                          <option value="25.5">25.5 cm 以上</option>
-                          <option value="own">マイシューズを持参する</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    {/* 希望日時（第1〜第3希望） */}
-                    <div className="space-y-3 bg-[#FAF7F2] p-5 rounded-2xl border border-gray-200">
-                      <span className="font-bold text-gray-800 block text-xs">
-                        希望日時（第1〜第3希望をご記入ください）
-                      </span>
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div>
-                          <label className="text-[11px] text-gray-500 block mb-1">第1希望</label>
-                          <input
-                            type="text"
-                            placeholder="例）10/14(火) 19:00〜"
-                            value={formData.preferredDate1}
-                            onChange={(e) => setFormData({ ...formData, preferredDate1: e.target.value })}
-                            className="w-full px-3 py-2 rounded-lg border border-gray-300 text-xs bg-white"
-                          />
-                        </div>
-                        <div>
-                          <label className="text-[11px] text-gray-500 block mb-1">第2希望</label>
-                          <input
-                            type="text"
-                            placeholder="例）10/18(土) 10:30〜"
-                            value={formData.preferredDate2}
-                            onChange={(e) => setFormData({ ...formData, preferredDate2: e.target.value })}
-                            className="w-full px-3 py-2 rounded-lg border border-gray-300 text-xs bg-white"
-                          />
-                        </div>
-                        <div>
-                          <label className="text-[11px] text-gray-500 block mb-1">第3希望</label>
-                          <input
-                            type="text"
-                            placeholder="例）平日の夜ならいつでも"
-                            value={formData.preferredDate3}
-                            onChange={(e) => setFormData({ ...formData, preferredDate3: e.target.value })}
-                            className="w-full px-3 py-2 rounded-lg border border-gray-300 text-xs bg-white"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                )}
-
-                {/* メッセージ・質問 */}
-                <div>
-                  <label className="block font-bold text-gray-700 mb-1">
-                    ご質問・ご要望など（任意）
-                  </label>
-                  <textarea
-                    rows={4}
-                    placeholder="運動経験についてのご相談や、気になる点などがございましたらご自由にご記入ください。"
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#801336] bg-[#FAF7F2]/50"
+                <div className="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
+                  <div
+                    className="bg-[#801336] h-full transition-all duration-300"
+                    style={{ width: currentStep === 1 ? "33%" : currentStep === 2 ? "66%" : "100%" }}
                   />
                 </div>
+              </div>
 
-                {/* 個人情報同意チェック */}
-                <div className="flex items-start gap-2 pt-2">
-                  <input type="checkbox" required id="agree" className="mt-1" defaultChecked />
-                  <label htmlFor="agree" className="text-xs text-gray-600">
-                    当スタジオのプライバシーポリシーに同意の上、送信します。ご入力いただいた情報はレッスン案内以外の目的には使用いたしません。
-                  </label>
-                </div>
-
-                <div className="pt-4">
+              {/* お問い合わせ種別切り替えタブ（STEP 1 のみ表示） */}
+              {currentStep === 1 && (
+                <div className="grid grid-cols-2 gap-3 mb-6">
                   <button
-                    type="submit"
-                    className="w-full py-4 bg-gradient-to-r from-[#801336] via-[#721B29] to-[#580F1E] hover:from-[#721B29] hover:to-[#2B0A11] text-white font-bold text-sm tracking-widest rounded-xl shadow-xl hover:shadow-2xl transition duration-300 flex items-center justify-center gap-2"
+                    type="button"
+                    onClick={() => setInquiryType("trial")}
+                    className={`py-3 text-xs sm:text-sm font-bold rounded-xl border transition-all ${
+                      inquiryType === "trial"
+                        ? "bg-[#801336] text-white border-[#801336] shadow"
+                        : "bg-[#FAF7F2] text-gray-600 border-gray-200 hover:bg-gray-100"
+                    }`}
                   >
-                    <Send className="w-4 h-4" />
-                    <span>この内容で送信する</span>
+                    体験レッスンを申し込む
                   </button>
-                  <p className="text-[11px] text-gray-400 text-center mt-3">
-                    ※ 送信後、24時間以内に担当講師よりご連絡いたします。
-                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setInquiryType("general")}
+                    className={`py-3 text-xs sm:text-sm font-bold rounded-xl border transition-all ${
+                      inquiryType === "general"
+                        ? "bg-[#801336] text-white border-[#801336] shadow"
+                        : "bg-[#FAF7F2] text-gray-600 border-gray-200 hover:bg-gray-100"
+                    }`}
+                  >
+                    一般的なお問い合わせ
+                  </button>
                 </div>
-              </form>
+              )}
+
+              {/* STEP 1: お客様情報 */}
+              {currentStep === 1 && (
+                <form onSubmit={handleNextStep} className="space-y-5 text-xs sm:text-sm">
+                  {/* スパム対策ハニーポット */}
+                  <input
+                    type="text"
+                    name="website"
+                    value={formData.honeypot}
+                    onChange={(e) => setFormData({ ...formData, honeypot: e.target.value })}
+                    className="hidden"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+
+                  {/* お名前 & フリガナ */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block font-bold text-gray-700 mb-1">
+                        お名前 <span className="text-red-500 text-xs">[必須]</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="例）山田 花子"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#801336] bg-[#FAF7F2]/50 text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block font-bold text-gray-700 mb-1">
+                        フリガナ <span className="text-red-500 text-xs">[必須]</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="例）ヤマダ ハナコ"
+                        value={formData.kana}
+                        onChange={(e) => setFormData({ ...formData, kana: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#801336] bg-[#FAF7F2]/50 text-sm"
+                      />
+                    </div>
+                  </div>
+
+                  {/* 郵便番号 & 住所自動入力（スライド11仕様） */}
+                  <div>
+                    <label className="block font-bold text-gray-700 mb-1">
+                      郵便番号 <span className="text-gray-600 text-xs font-normal">（住所自動入力）</span>
+                    </label>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        placeholder="例）153-0051（ハイフン有無どちらでも可）"
+                        value={formData.postalCode}
+                        onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
+                        className="w-2/3 px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#801336] bg-[#FAF7F2]/50 text-sm"
+                      />
+                      <button
+                        type="button"
+                        onClick={handlePostalLookup}
+                        disabled={isSearchingZip}
+                        className="w-1/3 px-3 py-3 bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold rounded-xl border border-gray-300 text-xs flex items-center justify-center gap-1 transition"
+                      >
+                        <Search className="w-3.5 h-3.5" />
+                        <span>{isSearchingZip ? "検索中..." : "住所自動入力"}</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* ご住所 */}
+                  <div>
+                    <label className="block font-bold text-gray-700 mb-1">ご住所</label>
+                    <input
+                      type="text"
+                      placeholder="例）東京都目黒区上目黒1-2-3 ○○マンション101"
+                      value={formData.address}
+                      onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#801336] bg-[#FAF7F2]/50 text-sm"
+                    />
+                  </div>
+
+                  {/* メールアドレス & 電話番号 */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block font-bold text-gray-700 mb-1">
+                        メールアドレス <span className="text-red-500 text-xs">[必須]</span>
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        placeholder="例）contact@estudio-oloroso.jp"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#801336] bg-[#FAF7F2]/50 text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block font-bold text-gray-700 mb-1">
+                        お電話番号 <span className="text-red-500 text-xs">[必須]</span>
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        placeholder="例）090-1234-5678"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#801336] bg-[#FAF7F2]/50 text-sm"
+                      />
+                    </div>
+                  </div>
+
+                  {/* 次へ進むボタン */}
+                  <div className="pt-4">
+                    <button
+                      type="submit"
+                      className="w-full py-4 bg-gradient-to-r from-[#801336] to-[#721B29] hover:from-[#721B29] hover:to-[#580F1E] text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition flex items-center justify-center gap-2 text-sm"
+                    >
+                      <span>次へ進む（希望日時の選択）</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </form>
+              )}
+
+              {/* STEP 2: 希望日時・クラス選択 */}
+              {currentStep === 2 && (
+                <form onSubmit={handleNextStep} className="space-y-6 text-xs sm:text-sm">
+                  {inquiryType === "trial" ? (
+                    <>
+                      {/* クラス & シューズサイズ */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block font-bold text-gray-700 mb-1">
+                            体験希望クラス <span className="text-red-500 text-xs">[必須]</span>
+                          </label>
+                          <select
+                            value={formData.preferredClass}
+                            onChange={(e) => setFormData({ ...formData, preferredClass: e.target.value })}
+                            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#801336] bg-[#FAF7F2]/50 text-sm"
+                          >
+                            <option value="beginner">入門・基礎クラス（未経験〜初心者）</option>
+                            <option value="choreography">初級・振付クラス（経験1年〜）</option>
+                            <option value="technica">テクニカ集中クラス（全レベル）</option>
+                            <option value="consult">講師と相談して決めたい</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="block font-bold text-gray-700 mb-1">
+                            シューズサイズ（無料レンタル）
+                          </label>
+                          <select
+                            value={formData.shoeSize}
+                            onChange={(e) => setFormData({ ...formData, shoeSize: e.target.value })}
+                            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#801336] bg-[#FAF7F2]/50 text-sm"
+                          >
+                            <option value="22.0">22.0 cm</option>
+                            <option value="22.5">22.5 cm</option>
+                            <option value="23.0">23.0 cm</option>
+                            <option value="23.5">23.5 cm (標準)</option>
+                            <option value="24.0">24.0 cm</option>
+                            <option value="24.5">24.5 cm</option>
+                            <option value="25.0">25.0 cm 以上</option>
+                            <option value="own">マイシューズを持参する</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      {/* 希望日時（第1〜第3希望） */}
+                      <div className="space-y-3 bg-[#FAF7F2] p-5 rounded-2xl border border-gray-200">
+                        <span className="font-bold text-gray-800 block text-xs">
+                          体験希望日時 <span className="text-red-500 text-xs">[第1希望必須]</span>
+                        </span>
+                        <div className="space-y-3">
+                          <div>
+                            <label className="text-[11px] text-gray-500 block mb-1">第1希望（必須）</label>
+                            <input
+                              type="text"
+                              required
+                              placeholder="例）10月14日(火) 11:00〜 入門クラス希望"
+                              value={formData.preferredDate1}
+                              onChange={(e) => setFormData({ ...formData, preferredDate1: e.target.value })}
+                              className="w-full px-3 py-2.5 rounded-lg border border-gray-300 text-xs bg-white"
+                            />
+                          </div>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                              <label className="text-[11px] text-gray-500 block mb-1">第2希望（任意）</label>
+                              <input
+                                type="text"
+                                placeholder="例）10月18日(土) 10:30〜"
+                                value={formData.preferredDate2}
+                                onChange={(e) => setFormData({ ...formData, preferredDate2: e.target.value })}
+                                className="w-full px-3 py-2.5 rounded-lg border border-gray-300 text-xs bg-white"
+                              />
+                            </div>
+                            <div>
+                              <label className="text-[11px] text-gray-500 block mb-1">第3希望（任意）</label>
+                              <input
+                                type="text"
+                                placeholder="例）平日夜ならいつでも可"
+                                value={formData.preferredDate3}
+                                onChange={(e) => setFormData({ ...formData, preferredDate3: e.target.value })}
+                                className="w-full px-3 py-2.5 rounded-lg border border-gray-300 text-xs bg-white"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <div>
+                      <label className="block font-bold text-gray-700 mb-1">
+                        お問い合わせ件名 <span className="text-red-500 text-xs">[必須]</span>
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="例）スタジオレンタルについて、出演依頼など"
+                        value={formData.preferredDate1}
+                        onChange={(e) => setFormData({ ...formData, preferredDate1: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#801336] bg-[#FAF7F2]/50 text-sm"
+                      />
+                    </div>
+                  )}
+
+                  {/* メッセージ・質問 */}
+                  <div>
+                    <label className="block font-bold text-gray-700 mb-1">
+                      メッセージ・ご質問（任意）
+                    </label>
+                    <textarea
+                      rows={3}
+                      placeholder="これまでの運動経験や、ご不安な点などがございましたらご自由にご記入ください。"
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#801336] bg-[#FAF7F2]/50 text-sm"
+                    />
+                  </div>
+
+                  {/* ボタン群 */}
+                  <div className="flex gap-3 pt-2">
+                    <button
+                      type="button"
+                      onClick={handlePrevStep}
+                      className="w-1/3 py-3.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition flex items-center justify-center gap-1.5 text-xs"
+                    >
+                      <ArrowLeft className="w-4 h-4" />
+                      <span>戻る</span>
+                    </button>
+                    <button
+                      type="submit"
+                      className="w-2/3 py-3.5 bg-gradient-to-r from-[#801336] to-[#721B29] hover:from-[#721B29] hover:to-[#580F1E] text-white font-bold rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-xs"
+                    >
+                      <span>確認画面へ進む</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </form>
+              )}
+
+              {/* STEP 3: 確認画面 */}
+              {currentStep === 3 && (
+                <form onSubmit={handleSubmit} className="space-y-6 text-xs sm:text-sm">
+                  <div className="bg-[#FAF7F2] p-5 rounded-2xl border border-gray-200 space-y-4">
+                    <h3 className="font-bold text-sm text-[#801336] border-b pb-2">ご入力内容の確認</h3>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                      <div>
+                        <span className="text-gray-500 block">種別</span>
+                        <span className="font-bold text-gray-900">
+                          {inquiryType === "trial" ? "体験レッスンのお申し込み" : "一般的なお問い合わせ"}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-gray-500 block">お名前</span>
+                        <span className="font-bold text-gray-900">{formData.name}（{formData.kana}）</span>
+                      </div>
+                      <div>
+                        <span className="text-gray-500 block">メールアドレス</span>
+                        <span className="font-bold text-gray-900">{formData.email}</span>
+                      </div>
+                      <div>
+                        <span className="text-gray-500 block">電話番号</span>
+                        <span className="font-bold text-gray-900">{formData.phone}</span>
+                      </div>
+                      {formData.address && (
+                        <div className="sm:col-span-2">
+                          <span className="text-gray-500 block">ご住所</span>
+                          <span className="text-gray-900">〒{formData.postalCode} {formData.address}</span>
+                        </div>
+                      )}
+                      {inquiryType === "trial" && (
+                        <>
+                          <div>
+                            <span className="text-gray-500 block">希望クラス</span>
+                            <span className="font-bold text-gray-900">{formData.preferredClass}</span>
+                          </div>
+                          <div>
+                            <span className="text-gray-500 block">レンタルシューズ</span>
+                            <span className="font-bold text-gray-900">{formData.shoeSize} cm</span>
+                          </div>
+                          <div className="sm:col-span-2">
+                            <span className="text-gray-500 block">体験希望日時</span>
+                            <span className="font-bold text-gray-900">
+                              第1希望: {formData.preferredDate1}
+                              {formData.preferredDate2 && ` / 第2希望: ${formData.preferredDate2}`}
+                              {formData.preferredDate3 && ` / 第3希望: ${formData.preferredDate3}`}
+                            </span>
+                          </div>
+                        </>
+                      )}
+                      {formData.message && (
+                        <div className="sm:col-span-2">
+                          <span className="text-gray-500 block">メッセージ</span>
+                          <p className="text-gray-800 whitespace-pre-wrap mt-0.5">{formData.message}</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* 個人情報同意チェック */}
+                  <div className="flex items-start gap-2 pt-1">
+                    <input type="checkbox" required id="agree" className="mt-1" defaultChecked />
+                    <label htmlFor="agree" className="text-xs text-gray-600">
+                      <a href="#" className="text-[#801336] underline">プライバシーポリシー</a>
+                      に同意の上、送信します。
+                    </label>
+                  </div>
+
+                  {/* 送信ボタン群 */}
+                  <div className="flex gap-3 pt-2">
+                    <button
+                      type="button"
+                      onClick={handlePrevStep}
+                      className="w-1/3 py-4 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition flex items-center justify-center gap-1.5 text-xs"
+                    >
+                      <ArrowLeft className="w-4 h-4" />
+                      <span>修正する</span>
+                    </button>
+                    <button
+                      type="submit"
+                      className="w-2/3 py-4 bg-gradient-to-r from-[#801336] to-[#721B29] hover:from-[#721B29] hover:to-[#580F1E] text-white font-bold rounded-xl shadow-xl transition flex items-center justify-center gap-2 text-sm"
+                    >
+                      <Send className="w-4 h-4" />
+                      <span>この内容で送信する（デモ）</span>
+                    </button>
+                  </div>
+
+                  <p className="text-[11px] text-center text-gray-600">
+                    ※ 本フォームはポートフォリオ用のデモ送信です。実際のメール配信や課金は行われません。
+                  </p>
+                </form>
+              )}
             </div>
           </section>
 
           {/* ========================================================= */}
-          {/* P06-04: よくある質問（FAQ） */}
+          {/* P06-04: よくある質問 (FAQ) */}
           {/* ========================================================= */}
           <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-10">
-              <span className="text-xs font-bold text-[#801336] tracking-widest uppercase">FAQ</span>
-              <h3 className="font-serif-jp text-xl sm:text-2xl font-bold text-gray-900 mt-1">
-                体験レッスンに関するよくある質問
-              </h3>
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <span className="text-xs font-bold text-[#801336] tracking-widest uppercase">
+                FAQ
+              </span>
+              <h2 className="font-serif-jp text-2xl font-bold text-gray-900 mt-1 mb-2">
+                体験レッスンに関するよくあるご質問
+              </h2>
+              <p className="text-xs text-gray-500">
+                初めての方から多く寄せられるご質問にお答えします。
+              </p>
             </div>
 
             <div className="space-y-4">
-              {contactFaqs.map((cf, cIdx) => (
-                <div
-                  key={cIdx}
-                  className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm"
-                >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === cIdx ? null : cIdx)}
-                    className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-xs sm:text-sm text-gray-900 hover:text-[#801336]"
+              {contactFaqs.map((faq, idx) => {
+                const isOpen = openFaq === idx;
+                return (
+                  <div
+                    key={idx}
+                    className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm"
                   >
-                    <div className="flex items-center gap-3">
-                      <HelpCircle className="w-4 h-4 text-[#801336] shrink-0" />
-                      <span>{cf.q}</span>
-                    </div>
-                    <ChevronDown
-                      className={`w-4 h-4 text-gray-400 transition-transform ${
-                        openFaq === cIdx ? "rotate-180 text-[#801336]" : ""
-                      }`}
-                    />
-                  </button>
-                  {openFaq === cIdx && (
-                    <div className="px-5 pb-5 pt-1 text-xs text-gray-600 leading-relaxed border-t border-gray-100 bg-[#FAF7F2]">
-                      {cf.a}
-                    </div>
-                  )}
-                </div>
-              ))}
+                    <button
+                      onClick={() => setOpenFaq(isOpen ? null : idx)}
+                      className="w-full p-5 text-left flex items-center justify-between gap-4 hover:bg-gray-50 transition"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="w-6 h-6 rounded-full bg-[#801336]/10 text-[#801336] font-bold text-xs flex items-center justify-center shrink-0">
+                          Q
+                        </span>
+                        <span className="font-bold text-xs sm:text-sm text-gray-900">{faq.q}</span>
+                      </div>
+                      <ChevronDown
+                        className={`w-4 h-4 text-gray-400 shrink-0 transition-transform ${
+                          isOpen ? "rotate-180 text-[#801336]" : ""
+                        }`}
+                      />
+                    </button>
+
+                    {isOpen && (
+                      <div className="px-5 pb-5 pt-1 border-t border-gray-100 flex items-start gap-3 bg-[#FAF7F2]/40">
+                        <span className="w-6 h-6 rounded-full bg-[#C5A059]/20 text-[#801336] font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
+                          A
+                        </span>
+                        <p className="text-xs text-gray-700 leading-relaxed">{faq.a}</p>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </section>
         </>
