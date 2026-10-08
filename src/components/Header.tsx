@@ -71,14 +71,14 @@ export default function Header() {
             <div className="relative w-10 h-10 rounded-full overflow-hidden border border-[#C5A059] shadow-sm">
               <Image
                 src="/images/logo.png"
-                alt="Luna de Jerez Logo"
+                alt="Estudio Oloroso Logo"
                 fill
                 className="object-cover group-hover:scale-105 transition-transform"
               />
             </div>
             <div className="flex flex-col">
               <span className="font-serif-jp text-xl md:text-2xl font-bold tracking-widest text-[#801336] group-hover:text-[#721B29] transition">
-                Luna de Jerez
+                Estudio Oloroso
               </span>
               <span className="text-[10px] tracking-wider text-[#721B29]/70 uppercase">
                 Flamenco Studio Tokyo
@@ -135,7 +135,7 @@ export default function Header() {
           <div className="fixed top-0 right-0 w-4/5 max-w-sm h-full bg-[#FAF7F2] shadow-2xl p-6 flex flex-col justify-between overflow-y-auto">
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-[#801336]/20">
-                <span className="font-serif-jp text-lg font-bold text-[#801336]">Luna de Jerez</span>
+                <span className="font-serif-jp text-lg font-bold text-[#801336]">Estudio Oloroso</span>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="p-1 text-gray-500 hover:text-black"
@@ -166,7 +166,7 @@ export default function Header() {
                   体験レッスンを予約する
                 </Link>
                 <a
-                  href="https://line.me/R/ti/p/@lunadejerez"
+                  href="https://line.me/R/ti/p/@estudio_oloroso"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full py-2.5 text-center block font-semibold text-white bg-[#06C755] rounded shadow-sm hover:opacity-90 transition text-sm"

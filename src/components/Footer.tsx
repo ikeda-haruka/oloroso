@@ -12,19 +12,19 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="relative w-10 h-10 rounded-full overflow-hidden border border-[#C5A059]">
-                <Image src="/images/logo.png" alt="Luna de Jerez" fill className="object-cover" />
+                <Image src="/images/logo.png" alt="Estudio Oloroso" fill className="object-cover" />
               </div>
               <div>
-                <h3 className="font-serif-jp text-xl font-bold tracking-wider text-white">Luna de Jerez</h3>
+                <h3 className="font-serif-jp text-xl font-bold tracking-wider text-white">Estudio Oloroso</h3>
                 <p className="text-[11px] text-[#C5A059] tracking-widest uppercase">Estudio de Baile Flamenco</p>
               </div>
             </div>
             <p className="text-xs text-[#FAF7F2]/80 leading-relaxed">
-              スペイン・アンダルシア地方ヘレス・デ・ラ・フロンテーラの伝統と息吹をそのままに。未経験から舞台を目指す方まで、心震える情熱のフラメンコをお届けします。
+              スペイン・アンダルシア地方ヘレス・デ・ラ・フロンテーラの伝統と息吹をそのままに。芳醇な辛口シェリー「オロロソ」のように、深遠な情熱とエレガンスが息づく本格フラメンコをお届けします。
             </p>
             <div className="flex items-center space-x-3 pt-2">
               <a
-                href="https://www.instagram.com/lunadejerez"
+                href="https://www.instagram.com/estudio_oloroso"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full bg-[#801336]/60 flex items-center justify-center hover:bg-[#801336] transition text-[#E8C888]"
@@ -163,7 +163,7 @@ export default function Footer() {
 
         {/* コピーライト & CMS管理リンク */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#FAF7F2]/60 gap-4">
-          <p>© 2026 Luna de Jerez (Flamenco Studio). ポートフォリオ用架空サイトです。</p>
+          <p>© 2026 Estudio Oloroso (Flamenco Studio). ポートフォリオ用架空サイトです。</p>
           <div className="flex items-center gap-4">
             <Link href="/contact" className="hover:underline">利用規約・免責事項</Link>
             <span>•</span>

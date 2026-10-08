@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "クラス案内・レッスンカリキュラム",
   description:
-    "入門・初心者からプロ志向・テクニカ強化まで。Luna de Jerez（ルナ・デ・ヘレス）のレベル別フラメンコクラス体系とカリキュラム詳細をご案内します。",
+    "入門・初心者からプロ志向・テクニカ強化まで。Estudio Oloroso（エストゥディオ・オロロソ）のレベル別フラメンコクラス体系とカリキュラム詳細をご案内します。",
 };
 
 export default function ClassesPage() {
@@ -282,7 +282,7 @@ export default function ClassesPage() {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="https://line.me/R/ti/p/@lunadejerez"
+            href="https://line.me/R/ti/p/@estudio_oloroso"
             target="_blank"
             rel="noopener noreferrer"
             className="px-6 py-2.5 bg-[#06C755] text-white font-bold text-xs rounded-lg shadow hover:opacity-95 transition"

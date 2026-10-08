@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "スタジオ紹介・講師プロフィール",
   description:
-    "Luna de Jerez（ルナ・デ・ヘレス）の理念、歴史、主宰・池田遥香のプロフィール、足腰に優しい特注無垢ダンスフロア設備、受講生の声をご紹介します。",
+    "Estudio Oloroso（エストゥディオ・オロロソ）の理念、歴史、主宰・池田遥香のプロフィール、足腰に優しい特注無垢ダンスフロア設備、受講生の声をご紹介します。",
 };
 
 export default function AboutPage() {
@@ -36,7 +36,7 @@ export default function AboutPage() {
       {/* ページタイトルヘッダー */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <span className="text-xs font-bold text-[#801336] tracking-widest uppercase">
-          About Luna de Jerez
+          About Estudio Oloroso
         </span>
         <h1 className="font-serif-jp text-3xl sm:text-5xl font-bold text-[#1C1917] mt-2 mb-4">
           スタジオ理念と講師紹介
@@ -47,7 +47,7 @@ export default function AboutPage() {
         </div>
         <p className="max-w-2xl mx-auto text-sm sm:text-base text-gray-700 leading-relaxed font-light">
           伝統に裏打ちされた本物の技術と、誰もが自由に感情を解放できる温かな空間。
-          「Luna de Jerez」が大切にしている哲学をご紹介します。
+          「Estudio Oloroso」が大切にしている哲学をご紹介します。
         </p>
       </section>
 
@@ -63,18 +63,18 @@ export default function AboutPage() {
             </div>
 
             <h2 className="font-serif-jp text-2xl sm:text-3xl font-bold text-[#1C1917] leading-tight">
-              「Luna de Jerez」に込めた
+              「Estudio Oloroso」に込めた
               <br />
-              月と大地の物語
+              芳醇なる情熱と熟成の物語
             </h2>
 
             <p className="text-sm text-gray-700 leading-relaxed">
               スペイン南部、シェリー酒と馬、そして深遠なカンテ（歌）の街「ヘレス・デ・ラ・フロンテーラ」。
-              フラメンコの原点とも言えるこの街の夜空には、静かに大地を照らす白銀の月が浮かんでいます。
+              フラメンコの原点とも言えるこの街を象徴する銘酒「オロロソ（Oloroso）」は、スペイン語で“芳醇な香り”を意味します。長い歳月をかけて空気と対話しながら熟成を重ねることで、深い琥珀色と力強いコク、深遠なアロマを纏う辛口シェリーです。
             </p>
             <p className="text-sm text-gray-700 leading-relaxed">
-              「Luna（月）」は内に秘めた優雅さと静けさ、「Jerez（ヘレス）」は大地を踏み鳴らす揺るぎない野生と情熱を象徴しています。
-              激しさだけでなく、洗練された品格を兼ね備えたフラメンコをお伝えしたいという願いから、当スタジオは名付けられました。
+              フラメンコもまた、同じ歩みを持っています。大地を踏みしめ、自らの人生や感情を重ねるほどに、身体の奥底から湧き出る表現は深く芳醇に熟成されていきます。
+              一過性の激しさだけにとどまらず、心に深く染み渡る品格と揺るぎない熱情を育みたいという想いを込めて、当スタジオは名付けられました。
             </p>
             <p className="text-sm text-gray-700 leading-relaxed">
               私たちは、単なる振付の模倣にとどまらず、身体の芯から湧き出る生きたコンパス（リズム）と、自己の内面と向き合う表現の深さを丁寧に分かち合っています。
@@ -111,7 +111,7 @@ export default function AboutPage() {
               <div className="relative aspect-[3/4] max-w-md mx-auto rounded-2xl overflow-hidden shadow-2xl border-4 border-[#FAF7F2]">
                 <Image
                   src="/images/instructor-ikeda.jpg"
-                  alt="Luna de Jerez 主宰 池田 遥香"
+                  alt="Estudio Oloroso 主宰 池田 遥香"
                   fill
                   className="object-cover"
                 />
@@ -158,7 +158,7 @@ export default function AboutPage() {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="font-semibold text-[#801336] shrink-0">2019年</span>
-                    <span>東京・中目黒にフラメンコスタジオ「Luna de Jerez」を創設。</span>
+                    <span>東京・中目黒にフラメンコスタジオ「Estudio Oloroso」を創設。</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="font-semibold text-[#801336] shrink-0">現在</span>

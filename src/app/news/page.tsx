@@ -17,7 +17,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "お知らせ・公式ブログ",
   description:
-    "Luna de Jerez（ルナ・デ・ヘレス）の最新お知らせ、休講・代講情報、フラメンコの知識コラム、レッスン日記をご覧いただけます。Decap CMS連携。",
+    "Estudio Oloroso（エストゥディオ・オロロソ）の最新お知らせ、休講・代講情報、フラメンコの知識コラム、レッスン日記をご覧いただけます。Decap CMS連携。",
 };
 
 export default function NewsIndexPage() {
@@ -199,12 +199,12 @@ export default function NewsIndexPage() {
                     <InstagramIcon className="w-4 h-4" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-gray-900">@lunadejerez</h4>
+                    <h4 className="text-xs font-bold text-gray-900">@estudio_oloroso</h4>
                     <p className="text-[10px] text-gray-500">Instagram 公式アカウント</p>
                   </div>
                 </div>
                 <a
-                  href="https://www.instagram.com/lunadejerez"
+                  href="https://www.instagram.com/estudio_oloroso"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs font-bold text-[#801336] hover:underline flex items-center gap-0.5"

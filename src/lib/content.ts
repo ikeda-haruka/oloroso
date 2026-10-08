@@ -51,17 +51,17 @@ export function getSiteInfo(): SiteInfo {
   const fullPath = path.join(contentDirectory, "settings", "site.json");
   if (!fs.existsSync(fullPath)) {
     return {
-      studioName: "Luna de Jerez (ルナ・デ・ヘレス)",
+      studioName: "Estudio Oloroso (エストゥディオ・オロロソ)",
       tagline: "アンダルシアの伝統と洗練された情熱",
       director: "池田 遥香",
-      phone: "03-6800-XXXX",
-      email: "contact@luna-de-jerez.jp",
-      address: "東京都目黒区上目黒2-15-8 ルナビルディング 3F",
-      access: "東急東横線・東京メトロ日比谷線「中目黒駅」南改札より徒歩4分",
+      phone: "03-0000-0000（架空）",
+      email: "contact@estudio-oloroso.jp",
+      address: "東京都目黒区（※架空の所在地）",
+      access: "想定ロケーション: 中目黒駅南改札より徒歩4分",
       openingHours: "月〜金 10:00 - 21:30 / 土・日 09:30 - 20:00",
-      lineUrl: "https://line.me/R/ti/p/@lunadejerez",
-      instagramUrl: "https://www.instagram.com/lunadejerez",
-      ekitenUrl: "https://www.ekiten.jp/shop_lunadejerez/",
+      lineUrl: "https://line.me/R/ti/p/@estudio_oloroso",
+      instagramUrl: "https://www.instagram.com/estudio_oloroso",
+      ekitenUrl: "https://www.ekiten.jp/shop_estudio_oloroso/",
     };
   }
   const fileContents = fs.readFileSync(fullPath, "utf8");

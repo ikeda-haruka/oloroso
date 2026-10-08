@@ -9,7 +9,7 @@ export default function MobileFloatingCTA() {
       <div className="grid grid-cols-2 gap-2.5 max-w-md mx-auto">
         {/* LINE相談ボタン */}
         <a
-          href="https://line.me/R/ti/p/@lunadejerez"
+          href="https://line.me/R/ti/p/@estudio_oloroso"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-1.5 py-3 px-3 bg-[#06C755] text-white rounded-lg text-xs font-bold shadow hover:opacity-95 transition"

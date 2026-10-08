@@ -118,7 +118,7 @@ export default function ContactPage() {
             </h2>
 
             <p className="text-sm text-gray-600 leading-relaxed max-w-lg mx-auto">
-              {formData.name} 様、この度は Luna de Jerez（架空のデモサイト）への送信テストありがとうございます。
+              {formData.name} 様、この度は Estudio Oloroso（架空のデモサイト）への送信テストありがとうございます。
               （※ポートフォリオ作品のため、実際のメール送信や予約登録は行われておりません）
             </p>
 
@@ -226,7 +226,7 @@ export default function ContactPage() {
               </div>
 
               <a
-                href="https://line.me/R/ti/p/@lunadejerez"
+                href="https://line.me/R/ti/p/@estudio_oloroso"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-3.5 bg-white text-[#06C755] font-bold text-xs tracking-wider rounded-xl shadow hover:bg-gray-100 transition whitespace-nowrap shrink-0"

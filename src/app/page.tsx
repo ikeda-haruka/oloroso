@@ -31,7 +31,7 @@ export default function Home() {
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/hero.jpg"
-            alt="Luna de Jerez フラメンコ舞踊"
+            alt="Estudio Oloroso フラメンコ舞踊"
             fill
             priority
             className="object-cover object-center scale-105 transition-transform duration-1000 ease-out"
@@ -353,7 +353,7 @@ export default function Home() {
                 体験レッスンを予約する
               </Link>
               <a
-                href="https://line.me/R/ti/p/@lunadejerez"
+                href="https://line.me/R/ti/p/@estudio_oloroso"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[11px] text-[#FAF7F2]/80 hover:text-white underline flex items-center gap-1"
@@ -467,12 +467,12 @@ export default function Home() {
                     <InstagramIcon className="w-4 h-4" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-[#1C1917]">@lunadejerez</h4>
+                    <h4 className="text-xs font-bold text-[#1C1917]">@estudio_oloroso</h4>
                     <p className="text-[10px] text-gray-500">公式Instagramフィード</p>
                   </div>
                 </div>
                 <a
-                  href="https://www.instagram.com/lunadejerez"
+                  href="https://www.instagram.com/estudio_oloroso"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[11px] font-bold text-[#801336] hover:underline flex items-center gap-0.5"
@@ -568,7 +568,7 @@ export default function Home() {
             {/* スタジオ外観・道順案内 (5カラム) */}
             <div className="lg:col-span-5 space-y-4">
               <div className="relative aspect-[16/10] rounded-xl overflow-hidden shadow-md">
-                <Image src="/images/about-studio.jpg" alt="Luna de Jerez スタジオ風景（イメージ）" fill className="object-cover" />
+                <Image src="/images/about-studio.jpg" alt="Estudio Oloroso スタジオ風景（イメージ）" fill className="object-cover" />
                 <div className="absolute bottom-2 left-2 bg-black/70 text-white text-[10px] px-2 py-0.5 rounded">
                   ※画像はスタジオイメージです
                 </div>
@@ -612,7 +612,7 @@ export default function Home() {
               </div>
               <div className="h-[340px] relative">
                 <iframe
-                  title="Luna de Jerez スタジオマップ（サンプル）"
+                  title="Estudio Oloroso スタジオマップ（サンプル）"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.0673418544983!2d139.69614487625126!3d35.6445582316521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b486927a7b3%3A0x8e578c773a987d90!2z5Lit55uu6buS6aeF!5e0!3m2!1sja!2sjp!4v1700000000000!5m2!1sja!2sjp"
                   width="100%"
                   height="100%"

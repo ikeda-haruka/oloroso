@@ -42,4 +42,5 @@ next-env.d.ts
 
 # temp files
 docs_parsed.txt
+docs_oloroso_parsed.txt
 extracted_assets/

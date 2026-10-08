@@ -20,13 +20,13 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://lunadejerez.com"),
+  metadataBase: new URL("https://estudio-oloroso.com"),
   title: {
-    default: "Luna de Jerez（ルナ・デ・ヘレス）｜ 架空のフラメンコスタジオ（ポートフォリオ作品）",
-    template: "%s | Luna de Jerez フラメンコスタジオ（架空・ポートフォリオ）",
+    default: "Estudio Oloroso（エストゥディオ・オロロソ）｜ 架空のフラメンコスタジオ（ポートフォリオ作品）",
+    template: "%s | Estudio Oloroso フラメンコスタジオ（架空・ポートフォリオ）",
   },
   description:
-    "【ポートフォリオ作品】Web制作・開発実績用の架空のフラメンコスタジオ「Luna de Jerez」のデモサイトです。実在の店舗・人物とは関係ありません。",
+    "【ポートフォリオ作品】Web制作・開発実績用の架空のフラメンコスタジオ「Estudio Oloroso（エストゥディオ・オロロソ）」のデモサイトです。実在の店舗・人物とは関係ありません。",
   keywords: [
     "ポートフォリオ",
     "Web制作",
@@ -34,16 +34,17 @@ export const metadata: Metadata = {
     "Decap CMS",
     "フラメンコスタジオ",
     "架空サイト",
-    "Luna de Jerez",
+    "Estudio Oloroso",
+    "エストゥディオオロロソ",
   ],
   authors: [{ name: "池田 遥香" }],
-  creator: "Luna de Jerez",
+  creator: "Estudio Oloroso",
   openGraph: {
     type: "website",
     locale: "ja_JP",
-    url: "https://lunadejerez.com",
-    siteName: "Luna de Jerez (ポートフォリオ作品)",
-    title: "Luna de Jerez｜架空のフラメンコスタジオ（ポートフォリオ作品）",
+    url: "https://estudio-oloroso.com",
+    siteName: "Estudio Oloroso (ポートフォリオ作品)",
+    title: "Estudio Oloroso｜架空のフラメンコスタジオ（ポートフォリオ作品）",
     description:
       "【ポートフォリオ作品】Web制作・開発実績用の架空のフラメンコスタジオサイトです。",
     images: [
@@ -51,13 +52,13 @@ export const metadata: Metadata = {
         url: "/images/hero.jpg",
         width: 1200,
         height: 630,
-        alt: "Luna de Jerez フラメンコスタジオ（ポートフォリオ作品）",
+        alt: "Estudio Oloroso フラメンコスタジオ（ポートフォリオ作品）",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Luna de Jerez｜架空のフラメンコスタジオ（ポートフォリオ作品）",
+    title: "Estudio Oloroso｜架空のフラメンコスタジオ（ポートフォリオ作品）",
     description: "【ポートフォリオ作品】Web制作・開発実績用の架空のフラメンコスタジオサイトです。",
     images: ["/images/hero.jpg"],
   },
@@ -76,11 +77,11 @@ export default function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "DanceStudio",
-    "name": "Luna de Jerez (ルナ・デ・ヘレス) [架空の教室・ポートフォリオ作品]",
+    "name": "Estudio Oloroso (エストゥディオ・オロロソ) [架空の教室・ポートフォリオ作品]",
     "description": "ポートフォリオ用の架空のフラメンコスタジオサイトです。",
-    "image": "https://lunadejerez.com/images/hero.jpg",
+    "image": "https://estudio-oloroso.com/images/hero.jpg",
     "telephone": "03-0000-0000",
-    "url": "https://lunadejerez.com",
+    "url": "https://estudio-oloroso.com",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "東京都目黒区（架空の所在地）",

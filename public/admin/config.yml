@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: ikeda-haruka/lunadejerez
+  repo: ikeda-haruka/oloroso
   branch: main
   base_url: https://github.com
 
@@ -51,11 +51,11 @@ collections:
         name: "site_info"
         file: "content/settings/site.json"
         fields:
-          - { label: "スタジオ名", name: "studioName", widget: "string", default: "フラメンコスタジオ Luna de Jerez" }
+          - { label: "スタジオ名", name: "studioName", widget: "string", default: "フラメンコスタジオ Estudio Oloroso" }
           - { label: "代表・主宰", name: "director", widget: "string", default: "池田 遥香" }
-          - { label: "電話番号", name: "phone", widget: "string", default: "03-XXXX-XXXX" }
-          - { label: "メールアドレス", name: "email", widget: "string", default: "info@luna-de-jerez.jp" }
-          - { label: "所在地", name: "address", widget: "string", default: "東京都XX区XXXX 1-2-3 ルナビル 3F" }
-          - { label: "最寄り駅・アクセス", name: "access", widget: "string", default: "最寄駅より徒歩4分" }
-          - { label: "公式LINE URL", name: "lineUrl", widget: "string", default: "https://line.me/R/ti/p/@lunadejerez" }
-          - { label: "Instagram URL", name: "instagramUrl", widget: "string", default: "https://www.instagram.com/lunadejerez/" }
+          - { label: "電話番号", name: "phone", widget: "string", default: "03-0000-0000（架空）" }
+          - { label: "メールアドレス", name: "email", widget: "string", default: "contact@estudio-oloroso.jp" }
+          - { label: "所在地", name: "address", widget: "string", default: "東京都目黒区（※架空の所在地）" }
+          - { label: "最寄り駅・アクセス", name: "access", widget: "string", default: "想定ロケーション: 中目黒駅徒歩4分" }
+          - { label: "公式LINE URL", name: "lineUrl", widget: "string", default: "https://line.me/R/ti/p/@estudio_oloroso" }
+          - { label: "Instagram URL", name: "instagramUrl", widget: "string", default: "https://www.instagram.com/estudio_oloroso" }

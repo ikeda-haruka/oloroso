@@ -22,7 +22,7 @@ export async function generateMetadata({
   if (!post) return { title: "記事が見つかりません" };
 
   return {
-    title: `${post.title} | Luna de Jerez 公式ブログ`,
+    title: `${post.title} | Estudio Oloroso 公式ブログ`,
     description: post.excerpt || `${post.title} の詳細記事です。`,
     openGraph: {
       title: post.title,
@@ -112,7 +112,7 @@ export default async function BlogPostDetailPage({
               Experience Flamenco
             </span>
             <h3 className="font-serif-jp text-xl sm:text-2xl font-bold mt-1 mb-3">
-              Luna de Jerez でフラメンコを始めてみませんか？
+              Estudio Oloroso でフラメンコを始めてみませんか？
             </h3>
             <p className="text-xs sm:text-sm text-[#FAF7F2]/90 max-w-lg mx-auto mb-6">
               未経験の方に向けた手ぶらで参加できる体験レッスンを随時開講しています。
