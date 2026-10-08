@@ -1,0 +1,61 @@
+backend:
+  name: github
+  repo: ikeda-haruka/lunadejerez
+  branch: main
+  base_url: https://github.com
+
+# ローカル環境でのデバッグ用 (npx decap-server 起動時)
+local_backend: true
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+locale: "ja"
+
+collections:
+  - name: "news"
+    label: "お知らせ・休講情報"
+    folder: "content/news"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "タイトル", name: "title", widget: "string" }
+      - { label: "公開日時", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD", timeFormat: false }
+      - { label: "カテゴリー", name: "category", widget: "select", options: ["重要なお知らせ", "休講・代講", "イベント・発表会", "一般案内"], default: "一般案内" }
+      - { label: "最上部ピン留め表示", name: "isPinned", widget: "boolean", default: false, required: false }
+      - { label: "緊急アラート表示", name: "isAlert", widget: "boolean", default: false, required: false }
+      - { label: "要約・概要", name: "summary", widget: "string", required: false }
+      - { label: "本文", name: "body", widget: "markdown" }
+
+  - name: "blog"
+    label: "公式ブログ記事"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "タイトル", name: "title", widget: "string" }
+      - { label: "公開日時", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD", timeFormat: false }
+      - { label: "カテゴリー", name: "category", widget: "select", options: ["日々のレッスン風景", "フラメンコの豆知識", "イベントレポート", "衣装・舞台", "スタジオからのお知らせ"], default: "日々のレッスン風景" }
+      - { label: "タグ", name: "tags", widget: "list", required: false }
+      - { label: "アイキャッチ画像", name: "thumbnail", widget: "image", required: false }
+      - { label: "抜粋", name: "excerpt", widget: "text", required: false }
+      - { label: "本文", name: "body", widget: "markdown" }
+
+  - name: "settings"
+    label: "スタジオ基本情報"
+    files:
+      - label: "スタジオ基本設定"
+        name: "site_info"
+        file: "content/settings/site.json"
+        fields:
+          - { label: "スタジオ名", name: "studioName", widget: "string", default: "フラメンコスタジオ Luna de Jerez" }
+          - { label: "代表・主宰", name: "director", widget: "string", default: "池田 遥香" }
+          - { label: "電話番号", name: "phone", widget: "string", default: "03-XXXX-XXXX" }
+          - { label: "メールアドレス", name: "email", widget: "string", default: "info@luna-de-jerez.jp" }
+          - { label: "所在地", name: "address", widget: "string", default: "東京都XX区XXXX 1-2-3 ルナビル 3F" }
+          - { label: "最寄り駅・アクセス", name: "access", widget: "string", default: "最寄駅より徒歩4分" }
+          - { label: "公式LINE URL", name: "lineUrl", widget: "string", default: "https://line.me/R/ti/p/@lunadejerez" }
+          - { label: "Instagram URL", name: "instagramUrl", widget: "string", default: "https://www.instagram.com/lunadejerez/" }

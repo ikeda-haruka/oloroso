@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Luna de Jerez（ルナ・デ・ヘレス）公式WEBサイト
 
-## Getting Started
+フラメンコスタジオ「Luna de Jerez」公式WEBサイトの Next.js + Decap CMS + GitHub 構成リポジトリです。
+本場スペイン・アンダルシア地方ヘレス・デ・ラ・フロンテーラの伝統と「洗練された情熱（Sophisticated Passion）」をテーマに制作されています。
 
-First, run the development server:
+---
 
+## 🌹 特徴・技術スタック
+
+- **フレームワーク**: Next.js (App Router, Turbopack, TypeScript)
+- **スタイリング**: Tailwind CSS
+- **CMS**: Decap CMS（旧 Netlify CMS）
+  - 管理画面: `/admin/`
+  - コンテンツフォーマット: Markdown / Frontmatter
+  - データ保存先: GitHub リポジトリ（`content/news/`, `content/blog/`, `content/settings/`）
+- **アイコン**: Lucide React + カスタムSVGアイコン
+- **SEO & OGP**: メタタグ、Twitter Cards、構造化データ（JSON-LD DanceStudio/LocalBusiness）
+- **レスポンシブ**: スマートフォン追従フローティングCTA（LINE予約 / 体験予約）、折りたたみアコーディオン、Stickyヘッダー
+
+---
+
+## 📁 ページ構成
+
+| ページ名 | パス | 主な内容 |
+|---|---|---|
+| **トップページ** | `/` | ヒーローFV、スタジオ理念、3大クラスハイライト、体験特典バナー、インフォハブ（News/Instagram/エキテン）、アクセス案内 |
+| **スタジオ紹介** | `/about` | ヘレスの伝統理念、主宰・池田遥香プロフィール・受賞歴、無垢スプリングフロア設備ギャラリー、生徒の声・発表会レポート |
+| **クラス案内** | `/classes` | 入門・初級・中級・テクニカ・個人レッスンのステップアップフローチャート、カリキュラム詳細仕様 |
+| **スケジュール・料金** | `/schedule` | 曜日タブ切り替え式タイムテーブル、カード型料金体系表、キャンペーン特典、振替ルールFAQ |
+| **お知らせ・ブログ** | `/news` | 重要休講アラート固定表示、Markdown公式ブログ（ココログ移行対応）、Instagramフィード、エキテン連携 |
+| **ブログ個別記事** | `/news/[slug]` | 記事詳細（SSG静的生成）、Markdown HTMLレンダリング、関連記事、体験予約CTA |
+| **体験予約・お問い合わせ** | `/contact` | 体験レッスン受講ステップ図解、予約フォーム（バリデーション・サンクス画面）、公式LINE予約、FAQ |
+| **CMS管理画面** | `/admin/` | Decap CMS 管理画面（お知らせ・ブログ・スタジオ設定の投稿・編集） |
+
+---
+
+## 🚀 開発・起動方法
+
+### 1. 依存関係のインストール
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. ローカル開発サーバー起動
+```bash
+npm run dev
+```
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いてサイトを確認できます。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Decap CMS 管理画面の利用
+- [http://localhost:3000/admin/](http://localhost:3000/admin/) にアクセスします。
+- ローカル環境で管理画面を動作させる場合:
+  ```bash
+  npx decap-server
+  ```
+  を別ターミナルで起動することで、ローカルファイルへの書き込みが可能になります。
+- 本番環境（GitHub / Vercel / Netlify）では、GitHub OAuth または Netlify Identity を連携して管理画面からコミット・公開が行われます。
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. プロダクションビルド
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎨 デザインガイドライン
+- **メインカラー**: 深みのあるワインレッド（`#801336` / `#721B29`）
+- **アクセントカラー**: シャンパンゴールド（`#C5A059` / `#E8C888`）
+- **ベースカラー**: オフホワイト（`#FAF7F2`）、チャコールグレー（`#1C1917`）
+- **タイポグラフィ**: 見出し（Noto Serif JP / 明朝体）、本文（Noto Sans JP / ゴシック体）

@@ -1,0 +1,173 @@
+import Link from "next/link";
+import Image from "next/image";
+import { MapPin, Phone, Mail, Clock, ExternalLink } from "lucide-react";
+import { InstagramIcon, YoutubeIcon, FacebookIcon } from "@/components/Icons";
+
+export default function Footer() {
+  return (
+    <footer className="bg-[#2B0A11] text-[#FAF7F2] pt-16 pb-24 md:pb-12 border-t border-[#801336]/40">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-[#801336]/30">
+          {/* ブランド情報 */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-[#C5A059]">
+                <Image src="/images/logo.png" alt="Luna de Jerez" fill className="object-cover" />
+              </div>
+              <div>
+                <h3 className="font-serif-jp text-xl font-bold tracking-wider text-white">Luna de Jerez</h3>
+                <p className="text-[11px] text-[#C5A059] tracking-widest uppercase">Estudio de Baile Flamenco</p>
+              </div>
+            </div>
+            <p className="text-xs text-[#FAF7F2]/80 leading-relaxed">
+              スペイン・アンダルシア地方ヘレス・デ・ラ・フロンテーラの伝統と息吹をそのままに。未経験から舞台を目指す方まで、心震える情熱のフラメンコをお届けします。
+            </p>
+            <div className="flex items-center space-x-3 pt-2">
+              <a
+                href="https://www.instagram.com/lunadejerez"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-[#801336]/60 flex items-center justify-center hover:bg-[#801336] transition text-[#E8C888]"
+                aria-label="Instagram"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-[#801336]/60 flex items-center justify-center hover:bg-[#801336] transition text-[#E8C888]"
+                aria-label="YouTube"
+              >
+                <YoutubeIcon className="w-4 h-4" />
+              </a>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-[#801336]/60 flex items-center justify-center hover:bg-[#801336] transition text-[#E8C888]"
+                aria-label="Facebook"
+              >
+                <FacebookIcon className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+
+          {/* クイックリンク */}
+          <div>
+            <h4 className="font-serif-jp text-sm font-semibold tracking-wider text-[#C5A059] uppercase mb-4 border-l-2 border-[#C5A059] pl-2">
+              サイトマップ
+            </h4>
+            <ul className="space-y-2.5 text-xs text-[#FAF7F2]/80">
+              <li>
+                <Link href="/" className="hover:text-[#E8C888] transition flex items-center gap-1.5">
+                  › トップページ
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:text-[#E8C888] transition flex items-center gap-1.5">
+                  › スタジオ紹介・講師理念
+                </Link>
+              </li>
+              <li>
+                <Link href="/classes" className="hover:text-[#E8C888] transition flex items-center gap-1.5">
+                  › クラス案内・カリキュラム
+                </Link>
+              </li>
+              <li>
+                <Link href="/schedule" className="hover:text-[#E8C888] transition flex items-center gap-1.5">
+                  › 週間スケジュール・料金案内
+                </Link>
+              </li>
+              <li>
+                <Link href="/news" className="hover:text-[#E8C888] transition flex items-center gap-1.5">
+                  › お知らせ・公式ブログ
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-[#E8C888] transition flex items-center gap-1.5">
+                  › 体験レッスン申込・お問い合わせ
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* レッスンカテゴリー */}
+          <div>
+            <h4 className="font-serif-jp text-sm font-semibold tracking-wider text-[#C5A059] uppercase mb-4 border-l-2 border-[#C5A059] pl-2">
+              受講クラス一覧
+            </h4>
+            <ul className="space-y-2.5 text-xs text-[#FAF7F2]/80">
+              <li>
+                <Link href="/classes#beginner" className="hover:text-[#E8C888] transition">
+                  ・入門クラス（セビジャーナス基礎）
+                </Link>
+              </li>
+              <li>
+                <Link href="/classes#intermediate" className="hover:text-[#E8C888] transition">
+                  ・初級・振付クラス（曲種表現力）
+                </Link>
+              </li>
+              <li>
+                <Link href="/classes#advanced" className="hover:text-[#E8C888] transition">
+                  ・中級・上級クラス（生演奏共演）
+                </Link>
+              </li>
+              <li>
+                <Link href="/classes#technique" className="hover:text-[#E8C888] transition">
+                  ・テクニカ集中（サパテアード・体幹）
+                </Link>
+              </li>
+              <li>
+                <Link href="/classes#private" className="hover:text-[#E8C888] transition">
+                  ・個人・特別プライベートレッスン
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* スタジオ情報・アクセス */}
+          <div>
+            <h4 className="font-serif-jp text-sm font-semibold tracking-wider text-[#C5A059] uppercase mb-4 border-l-2 border-[#C5A059] pl-2">
+              スタジオ情報
+            </h4>
+            <div className="space-y-3 text-xs text-[#FAF7F2]/80">
+              <div className="flex items-start gap-2">
+                <MapPin className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
+                <span>〒153-0051 東京都目黒区上目黒2-15-8 ルナビルディング 3F</span>
+              </div>
+              <p className="text-[11px] text-[#C5A059] pl-6">東急東横線・東京メトロ日比谷線「中目黒駅」南改札徒歩4分</p>
+              <div className="flex items-center gap-2">
+                <Phone className="w-4 h-4 text-[#C5A059] shrink-0" />
+                <span>03-6800-XXXX</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail className="w-4 h-4 text-[#C5A059] shrink-0" />
+                <span>contact@luna-de-jerez.jp</span>
+              </div>
+              <div className="flex items-start gap-2">
+                <Clock className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
+                <div>
+                  <p>月〜金: 10:00 - 21:30</p>
+                  <p>土・日: 09:30 - 20:00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* コピーライト & CMS管理リンク */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#FAF7F2]/60 gap-4">
+          <p>© 2026 Luna de Jerez (Flamenco Studio). All Rights Reserved.</p>
+          <div className="flex items-center gap-4">
+            <Link href="/contact" className="hover:underline">プライバシーポリシー</Link>
+            <span>•</span>
+            <Link href="/admin/" className="hover:text-[#E8C888] transition flex items-center gap-1 text-[11px]">
+              CMS管理者ログイン <ExternalLink className="w-3 h-3" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
