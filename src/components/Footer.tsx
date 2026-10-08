@@ -127,23 +127,28 @@ export default function Footer() {
           </div>
 
           {/* スタジオ情報・アクセス */}
+          {/* スタジオ情報・アクセス */}
           <div>
-            <h4 className="font-serif-jp text-sm font-semibold tracking-wider text-[#C5A059] uppercase mb-4 border-l-2 border-[#C5A059] pl-2">
-              スタジオ情報
+            <h4 className="font-serif-jp text-sm font-semibold tracking-wider text-[#C5A059] uppercase mb-4 border-l-2 border-[#C5A059] pl-2 flex items-center gap-2">
+              <span>スタジオ情報</span>
+              <span className="text-[10px] bg-[#801336] text-[#E8C888] px-1.5 py-0.5 rounded font-normal">架空</span>
             </h4>
             <div className="space-y-3 text-xs text-[#FAF7F2]/80">
+              <div className="bg-[#801336]/30 p-2 rounded text-[11px] text-[#E8C888] mb-2 leading-relaxed">
+                ※当サイトはポートフォリオ用の架空の教室です。実在の施設ではありません。
+              </div>
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
-                <span>〒153-0051 東京都目黒区上目黒2-15-8 ルナビルディング 3F</span>
+                <span>〒153-0051 東京都目黒区（※架空の所在地）</span>
               </div>
-              <p className="text-[11px] text-[#C5A059] pl-6">東急東横線・東京メトロ日比谷線「中目黒駅」南改札徒歩4分</p>
+              <p className="text-[11px] text-[#C5A059] pl-6">想定立地: 中目黒駅南改札徒歩4分（サンプル）</p>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-[#C5A059] shrink-0" />
-                <span>03-6800-XXXX</span>
+                <span>03-0000-0000（架空の番号）</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-[#C5A059] shrink-0" />
-                <span>contact@luna-de-jerez.jp</span>
+                <span>demo@example.com（デモ用）</span>
               </div>
               <div className="flex items-start gap-2">
                 <Clock className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
@@ -158,9 +163,9 @@ export default function Footer() {
 
         {/* コピーライト & CMS管理リンク */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#FAF7F2]/60 gap-4">
-          <p>© 2026 Luna de Jerez (Flamenco Studio). All Rights Reserved.</p>
+          <p>© 2026 Luna de Jerez (Flamenco Studio). ポートフォリオ用架空サイトです。</p>
           <div className="flex items-center gap-4">
-            <Link href="/contact" className="hover:underline">プライバシーポリシー</Link>
+            <Link href="/contact" className="hover:underline">利用規約・免責事項</Link>
             <span>•</span>
             <Link href="/admin/" className="hover:text-[#E8C888] transition flex items-center gap-1 text-[11px]">
               CMS管理者ログイン <ExternalLink className="w-3 h-3" />

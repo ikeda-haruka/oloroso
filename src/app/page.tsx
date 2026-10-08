@@ -544,43 +544,51 @@ export default function Home() {
       </section>
 
       {/* ========================================================= */}
-      {/* P01-06: スタジオアクセス・地図情報 */}
+      {/* P01-06: スタジオアクセス・地図情報（架空・デモ表示） */}
       {/* ========================================================= */}
       <section className="bg-white py-16 border-t border-[#801336]/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-xl mx-auto mb-12">
+          <div className="text-center max-w-2xl mx-auto mb-10">
             <span className="text-xs font-bold text-[#801336] tracking-widest uppercase">
-              Location & Access
+              Location & Access (Demo)
             </span>
             <h2 className="font-serif-jp text-2xl sm:text-3xl font-bold text-[#1C1917] mt-2 mb-3">
               スタジオ所在地・アクセス
+              <span className="inline-block text-xs bg-amber-100 text-amber-900 font-normal px-2.5 py-0.5 rounded-full ml-2 align-middle border border-amber-300">
+                ※架空のロケーション
+              </span>
             </h2>
-            <p className="text-xs text-gray-600">
-              中目黒駅南改札より徒歩4分。お仕事帰りや休日にも通いやすい好立地です。
-            </p>
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900 text-left sm:text-center leading-relaxed">
+              <strong>【ポートフォリオ作品としての注記】</strong><br />
+              当サイトはWeb制作・開発実績用の架空の教室サイトです。記載されている所在地、施設、Googleマップはすべてイメージ（デモ用サンプル）であり、実在するスタジオではございません。
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* スタジオ外観・道順案内 (5カラム) */}
             <div className="lg:col-span-5 space-y-4">
               <div className="relative aspect-[16/10] rounded-xl overflow-hidden shadow-md">
-                <Image src="/images/about-studio.jpg" alt="Luna de Jerez スタジオ風景" fill className="object-cover" />
+                <Image src="/images/about-studio.jpg" alt="Luna de Jerez スタジオ風景（イメージ）" fill className="object-cover" />
+                <div className="absolute bottom-2 left-2 bg-black/70 text-white text-[10px] px-2 py-0.5 rounded">
+                  ※画像はスタジオイメージです
+                </div>
               </div>
               <div className="bg-[#FAF7F2] p-5 rounded-xl border border-gray-200 space-y-3 text-xs">
                 <div>
-                  <span className="text-gray-500 font-medium">スタジオ所在地</span>
+                  <span className="text-gray-500 font-medium">スタジオ所在地（架空）</span>
                   <p className="font-bold text-gray-900 mt-0.5">
-                    〒153-0051 東京都目黒区上目黒2-15-8 ルナビルディング 3F
+                    〒153-0051 東京都目黒区（※架空の住所です）
                   </p>
+                  <p className="text-[11px] text-gray-500">※実在の住所・建物は存在しません</p>
                 </div>
                 <div>
-                  <span className="text-gray-500 font-medium">最寄り駅</span>
+                  <span className="text-gray-500 font-medium">想定最寄り駅</span>
                   <p className="text-gray-900 mt-0.5">
-                    東急東横線・東京メトロ日比谷線「中目黒駅」南改札より徒歩4分
+                    東急東横線・東京メトロ日比谷線「中目黒駅」南改札徒歩4分（想定ロケーション）
                   </p>
                 </div>
                 <div>
-                  <span className="text-gray-500 font-medium">営業時間</span>
+                  <span className="text-gray-500 font-medium">想定営業時間</span>
                   <p className="text-gray-900 mt-0.5">月〜金 10:00〜21:30 / 土日 09:30〜20:00</p>
                 </div>
                 <div className="pt-2">
@@ -590,24 +598,33 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="w-full py-2.5 px-4 bg-[#801336] hover:bg-[#721B29] text-white rounded font-bold text-center block transition text-xs shadow-sm"
                   >
-                    Google Maps アプリで道順を開く
+                    Google Maps（中目黒駅周辺のサンプルマップを開く）
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* Google Map 埋め込み (7カラム) */}
-            <div className="lg:col-span-7 h-[380px] rounded-xl overflow-hidden shadow-md border border-gray-200">
-              <iframe
-                title="Luna de Jerez スタジオマップ"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.0673418544983!2d139.69614487625126!3d35.6445582316521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b486927a7b3%3A0x8e578c773a987d90!2z5Lit55uu6buS6aeF!5e0!3m2!1sja!2sjp!4v1700000000000!5m2!1sja!2sjp"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen={false}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+            {/* Google Map 埋め込み (7カラム) - 架空であることが明確に分かるラベル付き */}
+            <div className="lg:col-span-7 rounded-xl overflow-hidden shadow-md border border-gray-200 relative">
+              <div className="bg-[#2B0A11] text-[#E8C888] text-xs py-2 px-4 flex items-center justify-between font-bold">
+                <span>📍 Google Map（中目黒駅周辺のイメージ表示・サンプル）</span>
+                <span className="bg-amber-500 text-black text-[10px] px-2 py-0.5 rounded">架空教室</span>
+              </div>
+              <div className="h-[340px] relative">
+                <iframe
+                  title="Luna de Jerez スタジオマップ（サンプル）"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.0673418544983!2d139.69614487625126!3d35.6445582316521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b486927a7b3%3A0x8e578c773a987d90!2z5Lit55uu6buS6aeF!5e0!3m2!1sja!2sjp!4v1700000000000!5m2!1sja!2sjp"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                <div className="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-sm p-2 rounded-lg border border-amber-300 shadow text-[11px] text-amber-900 text-center font-medium pointer-events-none">
+                  ⚠️ ※当スタジオはポートフォリオ用の架空の設定です。地図は中目黒エリアのサンプルです。
+                </div>
+              </div>
             </div>
           </div>
         </div>

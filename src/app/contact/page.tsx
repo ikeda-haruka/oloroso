@@ -92,13 +92,16 @@ export default function ContactPage() {
           体験レッスン予約・お問い合わせ
         </h1>
         <div className="w-16 h-1 bg-[#801336] mx-auto mb-6" />
+        <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900 max-w-xl mx-auto mb-6 leading-relaxed">
+          ※当サイトはポートフォリオ用の架空の教室サイトです。予約フォームはデモ動作用であり、実際の予約や課金は発生いたしません。
+        </div>
         <p className="max-w-2xl mx-auto text-sm sm:text-base text-gray-700 leading-relaxed font-light">
           未経験の方も手ぶらで大歓迎！足腰に優しい無垢フロアで、
           本場アンダルシアの情熱的なフラメンコをまずはお気軽にご体感ください。
         </p>
       </section>
 
-      {/* 送信完了後のサンクスページ表示 */}
+      {/* 送信完了後のサンクスページ表示（デモ用） */}
       {isSubmitted ? (
         <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-3xl p-8 sm:p-14 border-2 border-[#801336] shadow-2xl text-center space-y-6 animate-fadeIn">
@@ -106,20 +109,23 @@ export default function ContactPage() {
               <CheckCircle2 className="w-10 h-10" />
             </div>
 
+            <div className="inline-block bg-amber-100 text-amber-900 text-xs px-3 py-1 rounded-full font-bold">
+              ※ポートフォリオ用送信完了シミュレーション画面
+            </div>
+
             <h2 className="font-serif-jp text-2xl sm:text-3xl font-bold text-gray-900">
-              ご予約・お問い合わせを承りました
+              ご予約・お問い合わせを承りました（デモ）
             </h2>
 
             <p className="text-sm text-gray-600 leading-relaxed max-w-lg mx-auto">
-              {formData.name} 様、この度は Luna de Jerez へのお問い合わせありがとうございます。
-              ご入力いただいたメールアドレス（{formData.email}）宛てに自動受付メールを送信いたしました。
+              {formData.name} 様、この度は Luna de Jerez（架空のデモサイト）への送信テストありがとうございます。
+              （※ポートフォリオ作品のため、実際のメール送信や予約登録は行われておりません）
             </p>
 
             <div className="bg-[#FAF7F2] p-5 rounded-2xl border border-gray-200 text-xs text-gray-600 space-y-2 max-w-md mx-auto text-left">
-              <p className="font-bold text-gray-800">■ 今後の流れについて</p>
+              <p className="font-bold text-gray-800">■ 本番サイト想定のフロー</p>
               <p>・24時間以内に担当講師より、体験日時の確定メールをお送りいたします。</p>
-              <p>・当日はレッスン開始15分前にスタジオ（中目黒駅徒歩4分）へお越しください。</p>
-              <p>・万が一メールが届かない場合は、迷惑メールフォルダをご確認いただくか、お電話（03-6800-XXXX）またはLINEにてご連絡ください。</p>
+              <p>・当日はレッスン開始15分前にスタジオ（中目黒駅徒歩4分想定）へお越しください。</p>
             </div>
 
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -241,9 +247,16 @@ export default function ContactPage() {
                 </span>
                 <h2 className="font-serif-jp text-2xl sm:text-3xl font-bold text-gray-900 mt-1 mb-2">
                   WEB予約・お問い合わせフォーム
+                  <span className="inline-block text-xs bg-amber-100 text-amber-900 font-normal px-2.5 py-0.5 rounded-full ml-2 align-middle border border-amber-300">
+                    デモ動作用
+                  </span>
                 </h2>
+                <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900 mb-4 max-w-lg mx-auto leading-relaxed">
+                  <strong>【入力テスト歓迎】</strong><br />
+                  本フォームはポートフォリオ用のデモです。送信ボタンを押すと完了画面のシミュレーションが表示されます。実際の予約や課金・個人情報の保存は行われません。
+                </div>
                 <p className="text-xs text-gray-500">
-                  ※送信後、24時間以内に担当者よりご案内をお送りいたします。
+                  ※実際の教室サイト運用時は、送信後24時間以内に担当者よりご案内をお送りする想定です。
                 </p>
               </div>
 

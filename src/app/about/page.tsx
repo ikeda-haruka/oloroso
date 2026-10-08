@@ -42,6 +42,9 @@ export default function AboutPage() {
           スタジオ理念と講師紹介
         </h1>
         <div className="w-16 h-1 bg-[#801336] mx-auto mb-6" />
+        <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900 max-w-xl mx-auto mb-6 leading-relaxed">
+          ※本ページの内容・プロフィール・設備案内は、Webサイト制作ポートフォリオ用の架空の設定（サンプル）です。
+        </div>
         <p className="max-w-2xl mx-auto text-sm sm:text-base text-gray-700 leading-relaxed font-light">
           伝統に裏打ちされた本物の技術と、誰もが自由に感情を解放できる温かな空間。
           「Luna de Jerez」が大切にしている哲学をご紹介します。

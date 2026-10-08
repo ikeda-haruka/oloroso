@@ -28,6 +28,11 @@ export default function Header() {
 
   return (
     <>
+      {/* ポートフォリオ用架空サイト免責バナー */}
+      <div className="bg-[#FAF0E6] text-[#801336] text-[11px] py-1.5 px-4 border-b border-[#801336]/20 text-center font-bold tracking-wide">
+        【ポートフォリオ作品】当サイトはWeb制作実績用の架空のフラメンコスタジオサイトです。実在の店舗・人物・施設とは関係ありません。
+      </div>
+
       {/* 既存受講生向け・重要アナウンスバー */}
       <div className="bg-[#2B0A11] text-[#E8C888] text-xs py-2 px-4 border-b border-[#801336]/30">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -45,9 +50,9 @@ export default function Header() {
               <Calendar className="w-3 h-3 text-[#C5A059]" /> 今月のスケジュール
             </Link>
             <span className="text-[#801336]">|</span>
-            <a href="tel:036800XXXX" className="hover:text-white transition flex items-center gap-1">
-              <Phone className="w-3 h-3 text-[#C5A059]" /> 03-6800-XXXX
-            </a>
+            <span className="flex items-center gap-1 text-[#FAF7F2]/70">
+              <Phone className="w-3 h-3 text-[#C5A059]" /> 03-0000-0000（架空の番号）
+            </span>
           </div>
         </div>
       </div>
@@ -171,10 +176,11 @@ export default function Header() {
               </div>
             </div>
 
-            <div className="pt-6 border-t border-gray-200 text-xs text-gray-500 space-y-2">
-              <p>〒153-0051 東京都目黒区上目黒2-15-8</p>
-              <p>TEL: 03-6800-XXXX</p>
-              <p>中目黒駅南改札より徒歩4分</p>
+            <div className="pt-6 border-t border-gray-200 text-xs text-gray-500 space-y-1.5">
+              <p className="font-bold text-[#801336]">※ポートフォリオ用架空スタジオ</p>
+              <p>〒153-0051 東京都目黒区（※架空の所在地）</p>
+              <p>TEL: 03-0000-0000（架空）</p>
+              <p>想定立地: 中目黒駅徒歩4分</p>
             </div>
           </div>
         </div>
