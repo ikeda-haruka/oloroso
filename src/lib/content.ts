@@ -120,6 +120,8 @@ export async function getNewsBySlug(slug: string): Promise<NewsItem | null> {
   };
 }
 
+export const DEFAULT_BLOG_THUMBNAIL = "/images/default-blog-thumbnail.jpg";
+
 export function getAllBlogPosts(): BlogPost[] {
   const blogDir = path.join(contentDirectory, "blog");
   if (!fs.existsSync(blogDir)) return [];
@@ -133,13 +135,18 @@ export function getAllBlogPosts(): BlogPost[] {
       const fileContents = fs.readFileSync(fullPath, "utf8");
       const { data } = matter(fileContents);
 
+      const thumbnail =
+        data.thumbnail && typeof data.thumbnail === "string" && data.thumbnail.trim()
+          ? data.thumbnail
+          : DEFAULT_BLOG_THUMBNAIL;
+
       return {
         slug,
         title: data.title || "記事タイトル",
         date: data.date ? String(data.date) : "2026-10-01",
         category: data.category || "日々のレッスン風景",
         tags: Array.isArray(data.tags) ? data.tags : [],
-        thumbnail: data.thumbnail || "/images/blog-culture.jpg",
+        thumbnail,
         excerpt: data.excerpt || "",
       };
     });
@@ -155,13 +162,18 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
   const { data, content } = matter(fileContents);
   const contentHtml = await markdownToHtml(content);
 
+  const thumbnail =
+    data.thumbnail && typeof data.thumbnail === "string" && data.thumbnail.trim()
+      ? data.thumbnail
+      : DEFAULT_BLOG_THUMBNAIL;
+
   return {
     slug,
     title: data.title || "記事タイトル",
     date: data.date ? String(data.date) : "2026-10-01",
     category: data.category || "日々のレッスン風景",
     tags: Array.isArray(data.tags) ? data.tags : [],
-    thumbnail: data.thumbnail || "/images/blog-culture.jpg",
+    thumbnail,
     excerpt: data.excerpt || "",
     contentHtml,
   };

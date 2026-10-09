@@ -499,7 +499,7 @@ export default function Home() {
                   >
                     <div className="relative aspect-[16/10] overflow-hidden">
                       <Image
-                        src={post.thumbnail || "/images/blog-culture.jpg"}
+                        src={post.thumbnail || "/images/default-blog-thumbnail.jpg"}
                         alt={post.title}
                         fill
                         className="object-cover group-hover:scale-105 transition duration-300"

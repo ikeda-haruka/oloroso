@@ -120,7 +120,7 @@ export default function NewsIndexPage() {
                   >
                     <Link href={`/news/${post.slug}`} className="block relative aspect-[16/10] overflow-hidden">
                       <Image
-                        src={post.thumbnail || "/images/blog-culture.jpg"}
+                        src={post.thumbnail || "/images/default-blog-thumbnail.jpg"}
                         alt={post.title}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
