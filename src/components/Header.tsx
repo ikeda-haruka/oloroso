@@ -17,6 +17,18 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // モバイルメニュー開閉時のbodyスクロールロック
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
+
   const navLinks = [
     { name: "ホーム", href: "/" },
     { name: "スタジオ紹介", href: "/about" },
@@ -138,16 +150,31 @@ export default function Header() {
         </div>
       </header>
 
-      {/* スマホドロワーメニュー */}
+      {/* スマホドロワーメニュー（z-[100] でヘッダーz-50より最前面に配置し、二重表示を防止） */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm animate-fadeIn">
-          <div className="fixed top-0 right-0 w-4/5 max-w-sm h-full bg-[#FAF7F2] shadow-2xl p-6 flex flex-col justify-between overflow-y-auto">
+        <div className="lg:hidden fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm animate-fadeIn">
+          {/* 背景クリックで閉じる透明エリア */}
+          <div className="absolute inset-0" onClick={() => setIsMobileMenuOpen(false)} />
+
+          {/* ドロワーメニュー本体 */}
+          <div className="relative ml-auto w-4/5 max-w-sm h-full bg-[#FAF7F2] shadow-2xl p-6 flex flex-col justify-between overflow-y-auto z-[101]">
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-[#801336]/20">
-                <span className="font-serif-jp text-lg font-bold text-[#801336]">Estudio Oloroso</span>
+                <div className="flex items-center gap-2">
+                  <div className="relative w-7 h-7 rounded-full overflow-hidden border border-[#C5A059]">
+                    <Image
+                      src="/images/logo.png"
+                      alt="Logo"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <span className="font-serif-jp text-base font-bold text-[#801336]">Estudio Oloroso</span>
+                </div>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-1 text-gray-500 hover:text-black"
+                  className="p-1.5 rounded-lg text-gray-500 hover:text-black hover:bg-gray-100 transition"
+                  aria-label="メニューを閉じる"
                 >
                   <X className="w-6 h-6" />
                 </button>
@@ -178,24 +205,34 @@ export default function Header() {
                 </div>
               </div>
 
-              <div className="mt-4 flex flex-col space-y-3">
+              <div className="mt-4 flex flex-col space-y-1">
                 {navLinks.map((link) => (
                   <Link
                     key={link.name}
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-base font-medium text-[#1C1917] hover:text-[#801336] py-2 border-b border-gray-100 transition"
+                    className="text-base font-medium text-[#1C1917] hover:text-[#801336] py-2.5 px-1 border-b border-gray-100 transition flex items-center justify-between"
                   >
-                    {link.name}
+                    <span>{link.name}</span>
+                    <span className="text-gray-400 text-xs">›</span>
                   </Link>
                 ))}
+                {/* 採用情報への導線も追加 */}
+                <Link
+                  href="/recruit"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-sm font-medium text-gray-600 hover:text-[#801336] py-2 px-1 border-b border-gray-100 transition flex items-center justify-between"
+                >
+                  <span>採用情報（受付スタッフ募集）</span>
+                  <span className="text-gray-400 text-xs">›</span>
+                </Link>
               </div>
 
               <div className="mt-6 space-y-3">
                 <Link
                   href="/contact"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="w-full py-3 text-center block font-semibold text-white bg-gradient-to-r from-[#801336] to-[#721B29] rounded shadow-md"
+                  className="w-full py-3 text-center block font-semibold text-white bg-gradient-to-r from-[#801336] to-[#721B29] rounded-xl shadow-md"
                 >
                   体験レッスンを予約する
                 </Link>
@@ -203,7 +240,7 @@ export default function Header() {
                   href="https://line.me/R/ti/p/@estudio_oloroso"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-2.5 text-center block font-semibold text-white bg-[#06C755] rounded shadow-sm hover:opacity-90 transition text-sm"
+                  className="w-full py-2.5 text-center block font-semibold text-white bg-[#06C755] rounded-xl shadow-sm hover:opacity-90 transition text-sm"
                 >
                   公式LINEで問い合わせ・相談
                 </a>

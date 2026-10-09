@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Sparkles, CheckCircle2, Heart, Award, Music, Shield, ArrowRight, Star, ExternalLink } from "lucide-react";
+import { Sparkles, CheckCircle2, Heart, Award, Music, Shield, ArrowRight, Star, ExternalLink, Users } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -189,7 +189,7 @@ export default function AboutPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* 設備1: 特注無垢スプリングフロア */}
           <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 space-y-4">
             <div className="w-12 h-12 rounded-xl bg-[#801336]/10 flex items-center justify-center text-[#801336]">
@@ -199,7 +199,7 @@ export default function AboutPage() {
               足腰に優しい特注無垢ダンスフロア
             </h3>
             <p className="text-xs text-gray-600 leading-relaxed">
-              床下に衝撃吸収スプリング構造を備えた天然サクラ無垢材を採用。強いサパテアード（足打ち）による膝や腰への負担を極限まで和らげ、心地よい響きを実現します。
+              床下に衝撃吸収スプリング構造を備えた天然サクラ無垢材を採用。強いサパテアード（足打ち）による膝や腰への負担を和らげます。
             </p>
           </div>
 
@@ -212,7 +212,7 @@ export default function AboutPage() {
               大型一面ミラー & ハイレゾ音響
             </h3>
             <p className="text-xs text-gray-600 leading-relaxed">
-              幅10メートルにわたる歪みのない大型ミラーで、全身の姿勢や腕（ブラソ）の軌道を細かくチェック。Bluetooth高音質スピーカーで本場のギターや歌を臨場感豊かに再生します。
+              幅10メートルにわたる大型ミラーで全身の軌道をチェック。Bluetooth高音質スピーカーで本場のギターや歌を豊かに再生します。
             </p>
           </div>
 
@@ -225,8 +225,31 @@ export default function AboutPage() {
               更衣室・清潔なパウダースペース
             </h3>
             <p className="text-xs text-gray-600 leading-relaxed">
-              プライバシーに配慮した広々とした更衣室とメイクスペースを完備。レッスン後のお出かけやお仕事帰りでもストレスなく快適にご利用いただけます。
+              プライバシーに配慮した更衣室とメイクスペースを完備。レッスン後のお出かけやお仕事帰りでもストレスなくご利用いただけます。
             </p>
+          </div>
+
+          {/* 設備・体制4: 専任スタッフ常駐体制 */}
+          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 space-y-4 flex flex-col justify-between">
+            <div className="space-y-4">
+              <div className="w-12 h-12 rounded-xl bg-[#801336]/10 flex items-center justify-center text-[#801336]">
+                <Users className="w-6 h-6" />
+              </div>
+              <h3 className="font-serif-jp text-base font-bold text-gray-900">
+                安心の専任スタッフ常駐体制
+              </h3>
+              <p className="text-xs text-gray-600 leading-relaxed">
+                レッスン時だけでなく、自主練習・レンタル枠でも専任スタッフが常駐。開錠・施錠や安全確認、丁寧な受講生サポートを行います。
+              </p>
+            </div>
+            <div className="pt-2 border-t border-gray-100">
+              <Link
+                href="/recruit"
+                className="text-[11px] font-bold text-[#801336] hover:underline flex items-center gap-1"
+              >
+                受付スタッフ採用情報はこちら ›
+              </Link>
+            </div>
           </div>
         </div>
 

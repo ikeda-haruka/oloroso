@@ -89,6 +89,11 @@ export default function Footer() {
                   › 体験レッスン申込・お問い合わせ
                 </Link>
               </li>
+              <li>
+                <Link href="/recruit" className="hover:text-[#E8C888] transition flex items-center gap-1.5 text-amber-200/90 font-medium">
+                  › 採用情報（受付スタッフ募集）
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -165,6 +170,8 @@ export default function Footer() {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#FAF7F2]/60 gap-4">
           <p>© 2026 Estudio Oloroso (Flamenco Studio). ポートフォリオ用架空サイトです。</p>
           <div className="flex items-center gap-4">
+            <Link href="/recruit" className="hover:underline text-amber-200/90 font-medium">採用情報</Link>
+            <span>•</span>
             <Link href="/contact" className="hover:underline">利用規約・免責事項</Link>
             <span>•</span>
             <Link href="/admin/" className="hover:text-[#E8C888] transition flex items-center gap-1 text-[11px]">

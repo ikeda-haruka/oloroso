@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   Sparkles,
@@ -19,13 +19,23 @@ import {
   ShieldCheck,
   Search,
   Check,
+  Briefcase,
 } from "lucide-react";
 
 export default function ContactPage() {
-  const [inquiryType, setInquiryType] = useState<"trial" | "general">("trial");
+  const [inquiryType, setInquiryType] = useState<"trial" | "general" | "recruit">("trial");
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSearchingZip, setIsSearchingZip] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("type") === "recruit") {
+        setInquiryType("recruit");
+      }
+    }
+  }, []);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -105,17 +115,17 @@ export default function ContactPage() {
   const steps = [
     {
       step: "01",
-      title: "ご来校・お着替え・シューズ選び",
-      desc: "レッスン開始15分前にお越しください。足のサイズにぴったりのフラメンコシューズと練習用ファルダ（スカート）を無料でお見立てします。",
+      title: "ご来校・お着替え・シューズ選び（約10分）",
+      desc: "レッスン開始10分前を目安にお越しください。足のサイズにぴったりのフラメンコシューズと練習用ファルダ（スカート）を無料でお見立てします。",
     },
     {
       step: "02",
-      title: "基本姿勢とリズムレッスン（約50分）",
+      title: "基本姿勢とリズムレッスン（約40分）",
       desc: "背筋を伸ばす美しい立ち姿、基本のブラソ（腕の動かし方）、そして足打ち（サパテアード）の基本を体験。無理なく楽しく身体を動かします。",
     },
     {
       step: "03",
-      title: "クールダウン & ご相談（約15分）",
+      title: "クールダウン & ご相談（約10分）",
       desc: "レッスン後のストレッチを行いながら、クラスの雰囲気や通い方について講師とお話しいただけます。無理な勧誘は一切ございません。",
     },
   ];
@@ -182,8 +192,8 @@ export default function ContactPage() {
 
             <div className="bg-[#FAF7F2] p-5 rounded-2xl border border-gray-200 text-xs text-gray-600 space-y-2 max-w-md mx-auto text-left">
               <p className="font-bold text-gray-800">■ 本番サイト想定のフロー</p>
-              <p>・24時間以内に担当講師より、体験日時の確定メールをお送りいたします。</p>
-              <p>・当日はレッスン開始15分前にスタジオ（中目黒駅徒歩4分想定）へお越しください。</p>
+              <p>・24時間以内に担当者より、確定のご連絡メールをお送りいたします。</p>
+              <p>・体験当日はレッスン開始10分前を目安にスタジオへお越しください。</p>
             </div>
 
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -342,11 +352,11 @@ export default function ContactPage() {
 
               {/* お問い合わせ種別切り替えタブ（STEP 1 のみ表示） */}
               {currentStep === 1 && (
-                <div className="grid grid-cols-2 gap-3 mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-6">
                   <button
                     type="button"
                     onClick={() => setInquiryType("trial")}
-                    className={`py-3 text-xs sm:text-sm font-bold rounded-xl border transition-all ${
+                    className={`py-3 px-2 text-xs sm:text-sm font-bold rounded-xl border transition-all ${
                       inquiryType === "trial"
                         ? "bg-[#801336] text-white border-[#801336] shadow"
                         : "bg-[#FAF7F2] text-gray-600 border-gray-200 hover:bg-gray-100"
@@ -356,8 +366,19 @@ export default function ContactPage() {
                   </button>
                   <button
                     type="button"
+                    onClick={() => setInquiryType("recruit")}
+                    className={`py-3 px-2 text-xs sm:text-sm font-bold rounded-xl border transition-all ${
+                      inquiryType === "recruit"
+                        ? "bg-[#801336] text-white border-[#801336] shadow"
+                        : "bg-[#FAF7F2] text-gray-600 border-gray-200 hover:bg-gray-100"
+                    }`}
+                  >
+                    受付スタッフ採用応募・質問
+                  </button>
+                  <button
+                    type="button"
                     onClick={() => setInquiryType("general")}
-                    className={`py-3 text-xs sm:text-sm font-bold rounded-xl border transition-all ${
+                    className={`py-3 px-2 text-xs sm:text-sm font-bold rounded-xl border transition-all ${
                       inquiryType === "general"
                         ? "bg-[#801336] text-white border-[#801336] shadow"
                         : "bg-[#FAF7F2] text-gray-600 border-gray-200 hover:bg-gray-100"
@@ -578,6 +599,37 @@ export default function ContactPage() {
                         </div>
                       </div>
                     </>
+                  ) : inquiryType === "recruit" ? (
+                    <div className="space-y-4 bg-[#FAF7F2] p-5 rounded-2xl border border-gray-200">
+                      <div>
+                        <label className="block font-bold text-gray-700 mb-1">
+                          応募職種 <span className="text-red-500 text-xs">[必須]</span>
+                        </label>
+                        <select
+                          value={formData.preferredClass}
+                          onChange={(e) => setFormData({ ...formData, preferredClass: e.target.value })}
+                          className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#801336] bg-white text-sm"
+                        >
+                          <option value="reception">スタジオ受付・運営事務スタッフ（アルバイト / パート）</option>
+                          <option value="reception_full">スタジオ運営スタッフ（正社員登用前提）</option>
+                          <option value="other">その他・採用に関するご相談</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block font-bold text-gray-700 mb-1">
+                          希望の勤務日数・曜日・時間帯 <span className="text-red-500 text-xs">[必須]</span>
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          placeholder="例）週2〜3日希望（平日18:00〜21:30、土日終日など）"
+                          value={formData.preferredDate1}
+                          onChange={(e) => setFormData({ ...formData, preferredDate1: e.target.value })}
+                          className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#801336] bg-white text-sm"
+                        />
+                      </div>
+                    </div>
                   ) : (
                     <div>
                       <label className="block font-bold text-gray-700 mb-1">
@@ -597,11 +649,15 @@ export default function ContactPage() {
                   {/* メッセージ・質問 */}
                   <div>
                     <label className="block font-bold text-gray-700 mb-1">
-                      メッセージ・ご質問（任意）
+                      {inquiryType === "recruit" ? "志望動機・自己PR・ご質問（任意）" : "メッセージ・ご質問（任意）"}
                     </label>
                     <textarea
                       rows={3}
-                      placeholder="これまでの運動経験や、ご不安な点などがございましたらご自由にご記入ください。"
+                      placeholder={
+                        inquiryType === "recruit"
+                          ? "接客経験や志望動機、面接希望日時などがございましたらご自由にご記入ください。"
+                          : "これまでの運動経験や、ご不安な点などがございましたらご自由にご記入ください。"
+                      }
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#801336] bg-[#FAF7F2]/50 text-sm"
@@ -639,7 +695,11 @@ export default function ContactPage() {
                       <div>
                         <span className="text-gray-500 block">種別</span>
                         <span className="font-bold text-gray-900">
-                          {inquiryType === "trial" ? "体験レッスンのお申し込み" : "一般的なお問い合わせ"}
+                          {inquiryType === "trial"
+                            ? "体験レッスンのお申し込み"
+                            : inquiryType === "recruit"
+                            ? "スタジオ受付事務スタッフ採用エントリー"
+                            : "一般的なお問い合わせ"}
                         </span>
                       </div>
                       <div>
@@ -680,9 +740,29 @@ export default function ContactPage() {
                           </div>
                         </>
                       )}
+                      {inquiryType === "recruit" && (
+                        <>
+                          <div className="sm:col-span-2">
+                            <span className="text-gray-500 block">応募職種</span>
+                            <span className="font-bold text-gray-900">
+                              {formData.preferredClass === "reception"
+                                ? "スタジオ受付・運営事務スタッフ（アルバイト / パート）"
+                                : formData.preferredClass === "reception_full"
+                                ? "スタジオ運営スタッフ（正社員登用前提）"
+                                : "その他・採用に関するご相談"}
+                            </span>
+                          </div>
+                          <div className="sm:col-span-2">
+                            <span className="text-gray-500 block">希望勤務条件</span>
+                            <span className="font-bold text-gray-900">{formData.preferredDate1}</span>
+                          </div>
+                        </>
+                      )}
                       {formData.message && (
                         <div className="sm:col-span-2">
-                          <span className="text-gray-500 block">メッセージ</span>
+                          <span className="text-gray-500 block">
+                            {inquiryType === "recruit" ? "志望動機・自己PR・メッセージ" : "メッセージ"}
+                          </span>
                           <p className="text-gray-800 whitespace-pre-wrap mt-0.5">{formData.message}</p>
                         </div>
                       )}
