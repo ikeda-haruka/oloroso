@@ -16,6 +16,7 @@ import {
   CheckCircle2,
   ExternalLink,
   ChevronRight,
+  ArrowRight,
 } from "lucide-react";
 
 export default function MemberArchivePage() {
@@ -141,15 +142,13 @@ export default function MemberArchivePage() {
               </p>
             </div>
           </div>
-          <a
-            href="https://airrsv.net/estudio-oloroso/calendar"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/members/reservation"
             className="px-6 py-3.5 bg-gradient-to-r from-[#C5A059] to-[#E8C888] text-[#2B0A11] font-bold text-xs tracking-wider rounded-xl shadow hover:scale-105 transition-transform flex items-center gap-2 shrink-0 whitespace-nowrap"
           >
-            <span>会員専用スタジオ予約サイトへ</span>
-            <ExternalLink className="w-4 h-4" />
-          </a>
+            <span>会員専用スタジオ予約へ</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
 

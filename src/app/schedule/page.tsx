@@ -541,17 +541,16 @@ export default function SchedulePage() {
 
             {modalItem.level === "会員限定" || modalItem.className.includes("自主練習") ? (
               <div className="pt-2 space-y-2.5">
-                <a
-                  href="https://airrsv.net/estudio-oloroso/calendar"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/members/reservation"
+                  onClick={() => setModalItem(null)}
                   className="w-full py-3.5 bg-[#801336] hover:bg-[#721B29] text-white text-xs font-bold rounded-xl shadow transition flex items-center justify-center gap-2"
                 >
-                  <ExternalLink className="w-4 h-4" />
-                  <span>会員専用スタジオ予約サイトへ（空き状況確認・予約）</span>
-                </a>
+                  <CalendarCheck className="w-4 h-4" />
+                  <span>会員専用スタジオWeb予約へ（空き枠確認・予約）</span>
+                </Link>
                 <p className="text-[11px] text-gray-500 text-center leading-relaxed">
-                  ※当枠は在籍生徒専用の練習・レンタル枠です。一般の方の体験レッスン受講はできません。
+                  ※当枠は在籍生徒専用の練習・レンタル枠です（要会員ログイン）。一般の方の体験レッスン受講はできません。
                 </p>
               </div>
             ) : (

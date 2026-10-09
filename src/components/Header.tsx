@@ -61,22 +61,27 @@ export default function Header() {
             <span className="text-[#E8C888] font-bold text-[10px] bg-[#801336]/60 px-2 py-0.5 rounded flex items-center gap-1 border border-[#C5A059]/40">
               <Lock className="w-2.5 h-2.5 text-[#E8C888]" /> 会員専用:
             </span>
-            <a
-              href="https://airrsv.net/estudio-oloroso/calendar"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/members/reservation"
               className="hover:text-[#E8C888] transition flex items-center gap-1 font-semibold"
-              title="自主練習・レンタルWeb予約（外部予約サイト）"
+              title="自主練習・レンタルWeb予約システム"
             >
               <CalendarCheck className="w-3 h-3 text-[#C5A059]" /> スタジオWeb予約
-            </a>
+            </Link>
             <span className="text-[#801336]">|</span>
             <Link
               href="/members/archive"
               className="hover:text-[#E8C888] transition flex items-center gap-1 font-semibold"
               title="受講生専用レッスン復習用アーカイブ"
             >
-              <Video className="w-3 h-3 text-[#C5A059]" /> レッスン動画アーカイブ
+              <Video className="w-3 h-3 text-[#C5A059]" /> 動画アーカイブ
+            </Link>
+            <span className="text-[#801336]">|</span>
+            <Link
+              href="/members/login"
+              className="hover:text-white transition flex items-center gap-1 text-[10px] text-[#FAF7F2]/70"
+            >
+              ログイン
             </Link>
           </div>
         </div>
@@ -205,10 +210,9 @@ export default function Header() {
                   </span>
                 </div>
                 <div className="grid grid-cols-2 gap-2 text-xs">
-                  <a
-                    href="https://airrsv.net/estudio-oloroso/calendar"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Link
+                    href="/members/reservation"
+                    onClick={() => setIsMobileMenuOpen(false)}
                     className="p-2.5 bg-white rounded-xl border border-amber-200 text-[#801336] font-bold flex flex-col items-center justify-center gap-1 shadow-xs hover:bg-amber-50 transition text-center"
                   >
                     <div className="flex items-center gap-1 text-[11px]">
@@ -216,7 +220,7 @@ export default function Header() {
                       <span>スタジオWeb予約</span>
                     </div>
                     <span className="text-[9px] text-gray-500 font-normal">自主練習・レンタル</span>
-                  </a>
+                  </Link>
                   <Link
                     href="/members/archive"
                     onClick={() => setIsMobileMenuOpen(false)}
@@ -227,6 +231,16 @@ export default function Header() {
                       <span>動画アーカイブ</span>
                     </div>
                     <span className="text-[9px] text-gray-500 font-normal">復習・振替学習</span>
+                  </Link>
+                </div>
+                {/* ログイン・ログアウトへの導線 */}
+                <div className="mt-2 text-right">
+                  <Link
+                    href="/members/login"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-[10px] text-amber-900 font-medium hover:underline inline-flex items-center gap-0.5"
+                  >
+                    <span>受講生ログイン画面へ ›</span>
                   </Link>
                 </div>
               </div>

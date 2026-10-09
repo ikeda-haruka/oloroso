@@ -95,14 +95,19 @@ export default function Footer() {
                 </Link>
               </li>
               <li className="pt-2 border-t border-[#801336]/40">
+                <Link href="/members/reservation" className="hover:text-white transition flex items-center gap-1.5 text-[#E8C888] font-bold">
+                  › 【会員専用】スタジオWeb予約
+                </Link>
+              </li>
+              <li>
                 <Link href="/members/archive" className="hover:text-white transition flex items-center gap-1.5 text-[#E8C888] font-bold">
                   › 【会員専用】動画アーカイブ
                 </Link>
               </li>
               <li>
-                <a href="https://airrsv.net/estudio-oloroso/calendar" target="_blank" rel="noopener noreferrer" className="hover:text-white transition flex items-center gap-1.5 text-[#E8C888] font-bold">
-                  › 【会員専用】スタジオWeb予約
-                </a>
+                <Link href="/members/login" className="hover:text-white transition flex items-center gap-1.5 text-[#FAF7F2]/70 text-[11px]">
+                  › 会員ログイン
+                </Link>
               </li>
             </ul>
           </div>

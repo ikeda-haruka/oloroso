@@ -88,16 +88,14 @@ export default function Home() {
             <span className="text-[#E8C888] text-[11px] font-bold tracking-wider uppercase mr-1 flex items-center gap-1">
               <Lock className="w-3 h-3 text-[#C5A059]" /> 会員（生徒）専用:
             </span>
-            <a
-              href="https://airrsv.net/estudio-oloroso/calendar"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/members/reservation"
               className="px-3.5 py-1.5 bg-[#FAF7F2]/15 hover:bg-[#FAF7F2]/25 text-[#E8C888] font-bold rounded-lg border border-[#C5A059]/40 backdrop-blur-sm transition flex items-center gap-1.5"
-              title="会員専用スタジオ予約サイト（外部連携）"
+              title="会員専用スタジオ自主練習・レンタルWeb予約"
             >
               <CalendarCheck className="w-3.5 h-3.5 text-[#E8C888]" />
               <span>スタジオWeb予約</span>
-            </a>
+            </Link>
             <Link
               href="/members/archive"
               className="px-3.5 py-1.5 bg-[#FAF7F2]/15 hover:bg-[#FAF7F2]/25 text-white font-semibold rounded-lg border border-[#C5A059]/40 backdrop-blur-sm transition flex items-center gap-1.5"
