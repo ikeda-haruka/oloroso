@@ -122,6 +122,28 @@ export async function getNewsBySlug(slug: string): Promise<NewsItem | null> {
 
 export const DEFAULT_BLOG_THUMBNAIL = "/images/default-blog-thumbnail.jpg";
 
+/**
+ * サムネイル画像のパスを検証し、実在しない場合は安全に公式デフォルト画像へフォールバックする
+ */
+export function resolveValidThumbnail(thumbnailPath?: string | null): string {
+  if (!thumbnailPath || typeof thumbnailPath !== "string" || !thumbnailPath.trim()) {
+    return DEFAULT_BLOG_THUMBNAIL;
+  }
+  const trimmed = thumbnailPath.trim();
+  // 外部URL（https:// 等）の場合はそのまま返す
+  if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
+    return trimmed;
+  }
+  // public フォルダ内での実在チェック
+  const cleanPath = trimmed.startsWith("/") ? trimmed.slice(1) : trimmed;
+  const fullPath = path.join(process.cwd(), "public", cleanPath);
+  if (fs.existsSync(fullPath)) {
+    return trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
+  }
+  // 存在しないパス（404）の場合はデフォルト画像へフォールバック
+  return DEFAULT_BLOG_THUMBNAIL;
+}
+
 export function getAllBlogPosts(): BlogPost[] {
   const blogDir = path.join(contentDirectory, "blog");
   if (!fs.existsSync(blogDir)) return [];
@@ -135,10 +157,7 @@ export function getAllBlogPosts(): BlogPost[] {
       const fileContents = fs.readFileSync(fullPath, "utf8");
       const { data } = matter(fileContents);
 
-      const thumbnail =
-        data.thumbnail && typeof data.thumbnail === "string" && data.thumbnail.trim()
-          ? data.thumbnail
-          : DEFAULT_BLOG_THUMBNAIL;
+      const thumbnail = resolveValidThumbnail(data.thumbnail);
 
       return {
         slug,
@@ -162,10 +181,7 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
   const { data, content } = matter(fileContents);
   const contentHtml = await markdownToHtml(content);
 
-  const thumbnail =
-    data.thumbnail && typeof data.thumbnail === "string" && data.thumbnail.trim()
-      ? data.thumbnail
-      : DEFAULT_BLOG_THUMBNAIL;
+  const thumbnail = resolveValidThumbnail(data.thumbnail);
 
   return {
     slug,

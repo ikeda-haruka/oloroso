@@ -3,7 +3,7 @@ title: "【スタジオ企画】秋の衣装フリーマーケット会を開催
 date: "2026-10-02"
 category: "スタジオ日記・イベント"
 tags: ["フリーマーケット", "衣装", "ファルダ", "小物", "初心者サポート"]
-thumbnail: "/images/classes-beginner.jpg"
+thumbnail: "/images/class-beginner.jpg"
 excerpt: "生徒同士でサイズアウトした衣装やファルダ、マントン、小物を譲り合う恒例の『衣装フリーマーケット会』を開催。入門生も気軽に本格衣装と出会える温かいバザーとなりました。"
 ---
 

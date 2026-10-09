@@ -69,9 +69,44 @@ export default async function BlogPostDetailPage({
           </span>
         </div>
 
-        <h1 className="font-serif-jp text-2xl sm:text-4xl font-bold text-gray-900 leading-tight mb-6">
-          {post.title}
-        </h1>
+        {/* 記事タイトル */}
+        {(() => {
+          let badge = "";
+          let main = post.title;
+          let subtitle = "";
+
+          const badgeMatch = main.match(/^【(.*?)】\s*/);
+          if (badgeMatch) {
+            badge = badgeMatch[1];
+            main = main.replace(/^【.*?】\s*/, "");
+          }
+
+          const subMatch = main.match(/[〜~](.*?)[〜~]?$/);
+          if (subMatch) {
+            subtitle = subMatch[0];
+            main = main.slice(0, main.length - subtitle.length).trim();
+          }
+
+          return (
+            <div className="mb-6 space-y-2">
+              {badge && (
+                <div className="inline-block">
+                  <span className="text-xs font-bold text-[#801336] bg-[#801336]/10 border border-[#801336]/20 px-3 py-1 rounded-full tracking-wider">
+                    {badge}
+                  </span>
+                </div>
+              )}
+              <h1 className="font-serif-jp text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-snug sm:leading-tight tracking-normal [word-break:auto-phrase]">
+                {main}
+              </h1>
+              {subtitle && (
+                <p className="font-serif-jp text-xs sm:text-base text-gray-600 leading-relaxed font-normal pt-0.5 [word-break:auto-phrase]">
+                  {subtitle}
+                </p>
+              )}
+            </div>
+          );
+        })()}
 
         {post.tags && post.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-8">
@@ -88,7 +123,7 @@ export default async function BlogPostDetailPage({
 
         {/* アイキャッチ画像 */}
         {post.thumbnail && (
-          <div className="relative aspect-[16/9] rounded-3xl overflow-hidden shadow-xl mb-12 border-4 border-white">
+          <div className="relative aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg mb-8 sm:mb-12 border-2 sm:border-4 border-white bg-[#FAF7F2]">
             <Image
               src={post.thumbnail}
               alt={post.title}

@@ -136,7 +136,7 @@ export default function NewsIndexPage() {
                           <Calendar className="w-3 h-3 text-[#801336]" />
                           <span>{post.date}</span>
                         </div>
-                        <h3 className="font-serif-jp text-sm sm:text-base font-bold text-gray-900 group-hover:text-[#801336] transition leading-snug mb-3">
+                        <h3 className="font-serif-jp text-sm sm:text-base font-bold text-gray-900 group-hover:text-[#801336] transition leading-snug mb-3 [word-break:auto-phrase]">
                           <Link href={`/news/${post.slug}`}>{post.title}</Link>
                         </h3>
                         {post.excerpt && (

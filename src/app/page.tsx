@@ -511,7 +511,7 @@ export default function Home() {
                         <span>•</span>
                         <span className="text-[#801336] font-medium">{post.category}</span>
                       </div>
-                      <h4 className="text-xs font-bold text-[#1C1917] group-hover:text-[#801336] transition line-clamp-2 leading-snug">
+                      <h4 className="text-xs font-bold text-[#1C1917] group-hover:text-[#801336] transition line-clamp-2 leading-snug [word-break:auto-phrase]">
                         {post.title}
                       </h4>
                     </div>
