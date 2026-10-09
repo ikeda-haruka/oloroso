@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Sparkles, CheckCircle2, Heart, Award, Music, Shield, ArrowRight, Star, ExternalLink, Users } from "lucide-react";
+import { Sparkles, CheckCircle2, Heart, Award, Music, Shield, ArrowRight, Star, ExternalLink, Users, Utensils, ShoppingBag } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -357,6 +357,133 @@ export default function AboutPage() {
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================= */}
+      {/* スタジオ主催の文化交流・親睦イベント（スペイン料理会 ＆ 衣装フリマ会） */}
+      {/* ========================================================= */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <span className="text-xs font-bold text-[#801336] tracking-widest uppercase">
+            Community & Culture Events
+          </span>
+          <h2 className="font-serif-jp text-2xl sm:text-3xl font-bold text-[#1C1917] mt-2 mb-4">
+            踊りを通じて広がる、温かな文化交流と絆
+          </h2>
+          <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+            Estudio Olorosoでは、レッスン以外にもアンダルシアの文化を五感で楽しむ料理会や、
+            生徒同士で衣装を譲り合うフリーマーケット会などを定期開催しています。
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* イベント1: スペイン料理の料理会 */}
+          <div className="bg-white rounded-3xl p-8 sm:p-10 border border-[#801336]/20 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+            <div className="space-y-5">
+              <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-900 flex items-center justify-center border border-amber-200">
+                <Utensils className="w-6 h-6 text-[#801336]" />
+              </div>
+              <div>
+                <span className="text-[10px] font-bold text-[#801336] tracking-wider uppercase block mb-1">
+                  Fiesta Gastronómica
+                </span>
+                <h3 className="font-serif-jp text-xl font-bold text-gray-900">
+                  スペイン料理の料理会
+                </h3>
+              </div>
+              <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                フラメンコが育まれたアンダルシアの大地と食文化を、みんなで手作りして味わう大人気の親睦会です。
+                本場のレシピを再現し、ワインやシェリー（オロロソ）とともに笑顔あふれる時間を過ごします。
+              </p>
+
+              {/* 料理メニュー紹介 */}
+              <div className="bg-[#FAF7F2] p-4 rounded-2xl border border-gray-200 space-y-2">
+                <span className="text-xs font-bold text-gray-800 block mb-2 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
+                  作成する代表メニュー
+                </span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-gray-600">
+                  <div className="bg-white p-2.5 rounded-xl border border-gray-100">
+                    <p className="font-bold text-gray-800">・アヒージョ (Ajillo)</p>
+                    <p className="text-[11px] text-gray-500 mt-0.5">海老とマッシュルームの熱々ガーリックオイル煮</p>
+                  </div>
+                  <div className="bg-white p-2.5 rounded-xl border border-gray-100">
+                    <p className="font-bold text-gray-800">・トルティージャ (Tortilla)</p>
+                    <p className="text-[11px] text-gray-500 mt-0.5">じゃがいもと玉ねぎがぎっしり詰まったスペイン風オムレツ</p>
+                  </div>
+                  <div className="bg-white p-2.5 rounded-xl border border-gray-100">
+                    <p className="font-bold text-gray-800">・サルモレホ (Salmorejo)</p>
+                    <p className="text-[11px] text-gray-500 mt-0.5">アンダルシア・コルドバ発祥の濃厚な冷製トマトスープ</p>
+                  </div>
+                  <div className="bg-white p-2.5 rounded-xl border border-gray-100">
+                    <p className="font-bold text-gray-800">・パパ・アリニャー (Papas aliñás)</p>
+                    <p className="text-[11px] text-gray-500 mt-0.5">カディス名物、茹でじゃがいもと香味野菜の爽やか和え</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-6 border-t border-gray-100 text-xs text-gray-500 italic">
+              ※クラスや経験年数の垣根を越えて、スペインの歴史やフラメンコの曲種について楽しくおしゃべりできます。
+            </div>
+          </div>
+
+          {/* イベント2: 衣装のフリーマーケット会 */}
+          <div className="bg-white rounded-3xl p-8 sm:p-10 border border-[#801336]/20 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+            <div className="space-y-5">
+              <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-900 flex items-center justify-center border border-rose-200">
+                <ShoppingBag className="w-6 h-6 text-[#801336]" />
+              </div>
+              <div>
+                <span className="text-[10px] font-bold text-[#801336] tracking-wider uppercase block mb-1">
+                  Mercadillo de Flamenco
+                </span>
+                <h3 className="font-serif-jp text-xl font-bold text-gray-900">
+                  衣装のフリーマーケット会
+                </h3>
+              </div>
+              <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                先輩生徒から後輩生徒へ、大切に着てきたファルダ（スカート）や衣装、小物を譲り合うスタジオ内バザーです。
+                「最初から高価な衣装を揃えるのは不安…」という入門・初級の方も、お手頃な価格で素敵な本格衣装に出会えます。
+              </p>
+
+              {/* 出品アイテム例 */}
+              <div className="bg-[#FAF7F2] p-4 rounded-2xl border border-gray-200 space-y-2">
+                <span className="text-xs font-bold text-gray-800 block mb-2 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
+                  主な出品・お譲りアイテム
+                </span>
+                <div className="space-y-2 text-xs text-gray-600">
+                  <div className="bg-white p-2.5 rounded-xl border border-gray-100 flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#801336] shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-bold text-gray-800">練習用ファルダ & 発表会用ドレス</span>
+                      <p className="text-[11px] text-gray-500">スペイン直輸入の本格フリルスカートや、過去の発表会で着用した晴れ舞台用衣装</p>
+                    </div>
+                  </div>
+                  <div className="bg-white p-2.5 rounded-xl border border-gray-100 flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#801336] shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-bold text-gray-800">フラメンコ小物・装飾品</span>
+                      <p className="text-[11px] text-gray-500">マントン（大判ショール）、ピキージョ、アバニコ（扇子）、ペイネタ（髪飾り）、ピアス等</p>
+                    </div>
+                  </div>
+                  <div className="bg-white p-2.5 rounded-xl border border-gray-100 flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#801336] shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-bold text-gray-800">カスタネット（パリージョ）& シューズ</span>
+                      <p className="text-[11px] text-gray-500">状態の良い木製カスタネットや、サイズが合わなくなった良品シューズ</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-6 border-t border-gray-100 text-xs text-gray-500 italic">
+              ※モノを大切にするサステナブルな取り組みとして、生徒の皆様同士のあたたかいコミュニケーションが生まれています。
             </div>
           </div>
         </div>

@@ -94,6 +94,16 @@ export default function Footer() {
                   › 採用情報（受付スタッフ募集）
                 </Link>
               </li>
+              <li className="pt-2 border-t border-[#801336]/40">
+                <Link href="/members/archive" className="hover:text-white transition flex items-center gap-1.5 text-[#E8C888] font-bold">
+                  › 【会員専用】動画アーカイブ
+                </Link>
+              </li>
+              <li>
+                <a href="https://airrsv.net/estudio-oloroso/calendar" target="_blank" rel="noopener noreferrer" className="hover:text-white transition flex items-center gap-1.5 text-[#E8C888] font-bold">
+                  › 【会員専用】スタジオWeb予約
+                </a>
+              </li>
             </ul>
           </div>
 

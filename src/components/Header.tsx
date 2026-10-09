@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, Calendar, Phone, AlertCircle } from "lucide-react";
+import { Menu, X, Calendar, Phone, AlertCircle, Lock, Video, CalendarCheck, ExternalLink } from "lucide-react";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -57,14 +57,27 @@ export default function Header() {
               </Link>
             </span>
           </div>
-          <div className="hidden md:flex items-center gap-4 text-[11px] text-[#FAF7F2]/80">
-            <Link href="/schedule" className="hover:text-white transition flex items-center gap-1">
-              <Calendar className="w-3 h-3 text-[#C5A059]" /> 今月のスケジュール
-            </Link>
-            <span className="text-[#801336]">|</span>
-            <span className="flex items-center gap-1 text-[#FAF7F2]/70">
-              <Phone className="w-3 h-3 text-[#C5A059]" /> 03-0000-0000（架空の番号）
+          <div className="hidden md:flex items-center gap-3 text-[11px] text-[#FAF7F2]/80">
+            <span className="text-[#E8C888] font-bold text-[10px] bg-[#801336]/60 px-2 py-0.5 rounded flex items-center gap-1 border border-[#C5A059]/40">
+              <Lock className="w-2.5 h-2.5 text-[#E8C888]" /> 会員専用:
             </span>
+            <a
+              href="https://airrsv.net/estudio-oloroso/calendar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#E8C888] transition flex items-center gap-1 font-semibold"
+              title="自主練習・レンタルWeb予約（外部予約サイト）"
+            >
+              <CalendarCheck className="w-3 h-3 text-[#C5A059]" /> スタジオWeb予約
+            </a>
+            <span className="text-[#801336]">|</span>
+            <Link
+              href="/members/archive"
+              className="hover:text-[#E8C888] transition flex items-center gap-1 font-semibold"
+              title="受講生専用レッスン復習用アーカイブ"
+            >
+              <Video className="w-3 h-3 text-[#C5A059]" /> レッスン動画アーカイブ
+            </Link>
           </div>
         </div>
       </div>
@@ -180,27 +193,40 @@ export default function Header() {
                 </button>
               </div>
 
-              {/* 生徒専用クイックアクセスブロック */}
-              <div className="mt-4 p-3 bg-amber-50 rounded-xl border border-amber-200">
-                <span className="text-[10px] font-bold text-amber-900 tracking-wider uppercase block mb-1.5">
-                  生徒専用メニュー
-                </span>
+              {/* 会員（生徒）専用メニュー: スタジオWeb予約 & レッスン動画アーカイブ */}
+              <div className="mt-4 p-3.5 bg-gradient-to-br from-amber-50 to-orange-50/40 rounded-2xl border border-amber-300 shadow-xs">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[11px] font-bold text-amber-950 tracking-wider uppercase flex items-center gap-1.5">
+                    <Lock className="w-3.5 h-3.5 text-[#801336]" />
+                    会員（生徒）専用メニュー
+                  </span>
+                  <span className="text-[10px] bg-[#801336] text-white px-1.5 py-0.5 rounded font-bold">
+                    生徒限定
+                  </span>
+                </div>
                 <div className="grid grid-cols-2 gap-2 text-xs">
-                  <Link
-                    href="/news"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 bg-white rounded-lg border border-amber-200 text-amber-900 font-bold flex items-center justify-center gap-1 shadow-xs"
+                  <a
+                    href="https://airrsv.net/estudio-oloroso/calendar"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 bg-white rounded-xl border border-amber-200 text-[#801336] font-bold flex flex-col items-center justify-center gap-1 shadow-xs hover:bg-amber-50 transition text-center"
                   >
-                    <AlertCircle className="w-3.5 h-3.5 text-amber-700" />
-                    <span>休講・代講</span>
-                  </Link>
+                    <div className="flex items-center gap-1 text-[11px]">
+                      <CalendarCheck className="w-3.5 h-3.5" />
+                      <span>スタジオWeb予約</span>
+                    </div>
+                    <span className="text-[9px] text-gray-500 font-normal">自主練習・レンタル</span>
+                  </a>
                   <Link
-                    href="/schedule"
+                    href="/members/archive"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 bg-white rounded-lg border border-amber-200 text-[#801336] font-bold flex items-center justify-center gap-1 shadow-xs"
+                    className="p-2.5 bg-white rounded-xl border border-amber-200 text-amber-900 font-bold flex flex-col items-center justify-center gap-1 shadow-xs hover:bg-amber-50 transition text-center"
                   >
-                    <Calendar className="w-3.5 h-3.5" />
-                    <span>スケジュール</span>
+                    <div className="flex items-center gap-1 text-[11px]">
+                      <Video className="w-3.5 h-3.5 text-[#801336]" />
+                      <span>動画アーカイブ</span>
+                    </div>
+                    <span className="text-[9px] text-gray-500 font-normal">復習・振替学習</span>
                   </Link>
                 </div>
               </div>

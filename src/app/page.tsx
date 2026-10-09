@@ -13,6 +13,9 @@ import {
   Star,
   ExternalLink,
   CheckCircle2,
+  Lock,
+  Video,
+  CalendarCheck,
 } from "lucide-react";
 import { InstagramIcon } from "@/components/Icons";
 import { getAllNews, getAllBlogPosts } from "@/lib/content";
@@ -80,30 +83,35 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* スライド5要件: 既存受講生向け「今月のスケジュール」および「会員ログイン」へのクイックリンクボタン */}
+          {/* 会員（受講生）専用クイックアクセス */}
           <div className="pt-6 border-t border-[#FAF7F2]/20 flex flex-wrap items-center justify-center gap-3 text-xs">
-            <span className="text-[#FAF7F2]/70 text-[11px] font-bold tracking-wider uppercase mr-1">
-              受講生専用:
+            <span className="text-[#E8C888] text-[11px] font-bold tracking-wider uppercase mr-1 flex items-center gap-1">
+              <Lock className="w-3 h-3 text-[#C5A059]" /> 会員（生徒）専用:
             </span>
+            <a
+              href="https://airrsv.net/estudio-oloroso/calendar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3.5 py-1.5 bg-[#FAF7F2]/15 hover:bg-[#FAF7F2]/25 text-[#E8C888] font-bold rounded-lg border border-[#C5A059]/40 backdrop-blur-sm transition flex items-center gap-1.5"
+              title="会員専用スタジオ予約サイト（外部連携）"
+            >
+              <CalendarCheck className="w-3.5 h-3.5 text-[#E8C888]" />
+              <span>スタジオWeb予約</span>
+            </a>
+            <Link
+              href="/members/archive"
+              className="px-3.5 py-1.5 bg-[#FAF7F2]/15 hover:bg-[#FAF7F2]/25 text-white font-semibold rounded-lg border border-[#C5A059]/40 backdrop-blur-sm transition flex items-center gap-1.5"
+              title="受講生専用レッスン復習用アーカイブ"
+            >
+              <Video className="w-3.5 h-3.5 text-[#E8C888]" />
+              <span>レッスン動画アーカイブ</span>
+            </Link>
             <Link
               href="/schedule"
-              className="px-3.5 py-1.5 bg-[#FAF7F2]/15 hover:bg-[#FAF7F2]/25 text-[#E8C888] font-bold rounded-lg border border-[#C5A059]/40 backdrop-blur-sm transition flex items-center gap-1.5"
-            >
-              <Calendar className="w-3.5 h-3.5 text-[#E8C888]" />
-              <span>今月のスケジュール</span>
-            </Link>
-            <Link
-              href="/news"
-              className="px-3.5 py-1.5 bg-[#FAF7F2]/10 hover:bg-[#FAF7F2]/20 text-[#FAF7F2] rounded-lg border border-white/20 backdrop-blur-sm transition flex items-center gap-1"
-            >
-              <span>休講・代講案内</span>
-            </Link>
-            <Link
-              href="/admin/"
               className="px-3 py-1.5 bg-black/30 hover:bg-black/50 text-[#FAF7F2]/80 hover:text-white rounded-lg border border-white/10 transition flex items-center gap-1 text-[11px]"
-              title="Decap CMS 管理画面（お知らせ・ブログの編集）"
             >
-              <span>会員・CMSログイン</span>
+              <Calendar className="w-3 h-3 text-[#C5A059]" />
+              <span>一般スケジュール</span>
             </Link>
           </div>
         </div>
@@ -302,6 +310,53 @@ export default function Home() {
               <span>クラス一覧・料金システムをすべて見る</span>
               <ChevronRight className="w-4 h-4" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* スタジオ主催の文化交流・コミュニティ紹介（スペイン料理会 ＆ 衣装フリマ会） */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-[#FAF7F2] rounded-3xl p-8 sm:p-12 border border-[#801336]/20 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-7 space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#801336]/10 text-[#801336] text-xs font-bold">
+              <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
+              <span>Culture & Community</span>
+            </div>
+            <h2 className="font-serif-jp text-2xl sm:text-3xl font-bold text-[#1C1917] leading-tight">
+              踊りだけにとどまらない、
+              <br />
+              <span className="text-[#801336]">アンダルシアの食と温かな交流</span>の場
+            </h2>
+            <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
+              当スタジオでは、アヒージョやトルティージャ、サルモレホ、パパ・アリニャーを手作りする「スペイン料理会」や、先輩生徒から衣装を譲り合える「衣装フリーマーケット会」を定期開催しています。
+              初心者の方もすぐに仲間と打ち解けられる、アットホームなコミュニティです。
+            </p>
+            <div className="pt-2 flex flex-wrap gap-4 text-xs font-bold text-[#801336]">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-green-700" /> スペイン料理会（アヒージョ・トルティージャ等）
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-green-700" /> 衣装フリーマーケット会（リユースバザー）
+              </span>
+            </div>
+            <div className="pt-2">
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#801336] hover:underline"
+              >
+                <span>スタジオの文化イベントについて詳しく見る</span>
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+
+          <div className="lg:col-span-5 relative aspect-[4/3] rounded-2xl overflow-hidden shadow-md border-2 border-white">
+            <Image
+              src="/images/community.jpg"
+              alt="スタジオコミュニティ風景"
+              fill
+              className="object-cover"
+            />
           </div>
         </div>
       </section>
