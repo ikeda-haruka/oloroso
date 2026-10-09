@@ -166,3 +166,135 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
     contentHtml,
   };
 }
+
+export interface StaffMember {
+  slug: string;
+  staffId: string;
+  name: string;
+  kana: string;
+  role: string;
+  employmentType: string;
+  status: string;
+  joinedDate: string;
+  scheduleSummary: string;
+  email: string;
+  avatar?: string;
+  responsibilities: string[];
+  bio: string;
+  bioHtml?: string;
+}
+
+export interface MemberRecord {
+  slug: string;
+  memberId: string;
+  name: string;
+  kana: string;
+  email: string;
+  phone?: string;
+  status: string;
+  plan: string;
+  classLevel: string;
+  joinedDate: string;
+  canReserveStudio: boolean;
+  canAccessArchive: boolean;
+  notes?: string;
+}
+
+export function getAllStaff(): StaffMember[] {
+  const staffDir = path.join(contentDirectory, "staff");
+  if (!fs.existsSync(staffDir)) return [];
+  const filenames = fs.readdirSync(staffDir);
+
+  const items = filenames
+    .filter((fn) => fn.endsWith(".md"))
+    .map((filename) => {
+      const slug = filename.replace(/\.md$/, "");
+      const fullPath = path.join(staffDir, filename);
+      const fileContents = fs.readFileSync(fullPath, "utf8");
+      const { data, content } = matter(fileContents);
+
+      return {
+        slug,
+        staffId: data.staffId || slug,
+        name: data.name || "スタッフ",
+        kana: data.kana || "",
+        role: data.role || "スタッフ",
+        employmentType: data.employmentType || "常勤・常駐スタッフ",
+        status: data.status || "在籍・稼働中",
+        joinedDate: data.joinedDate ? String(data.joinedDate) : "",
+        scheduleSummary: data.scheduleSummary || "",
+        email: data.email || "",
+        avatar: data.avatar || "/images/instructor-ikeda.jpg",
+        responsibilities: Array.isArray(data.responsibilities) ? data.responsibilities : [],
+        bio: content || data.bio || "",
+      };
+    });
+
+  // Sort by staffId ascending (STF-001, STF-002, ...)
+  return items.sort((a, b) => a.staffId.localeCompare(b.staffId));
+}
+
+export async function getStaffBySlug(slug: string): Promise<StaffMember | null> {
+  const fullPath = path.join(contentDirectory, "staff", `${slug}.md`);
+  if (!fs.existsSync(fullPath)) return null;
+
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const { data, content } = matter(fileContents);
+  const bioHtml = await markdownToHtml(content);
+
+  return {
+    slug,
+    staffId: data.staffId || slug,
+    name: data.name || "スタッフ",
+    kana: data.kana || "",
+    role: data.role || "スタッフ",
+    employmentType: data.employmentType || "常勤・常駐スタッフ",
+    status: data.status || "在籍・稼働中",
+    joinedDate: data.joinedDate ? String(data.joinedDate) : "",
+    scheduleSummary: data.scheduleSummary || "",
+    email: data.email || "",
+    avatar: data.avatar || "/images/instructor-ikeda.jpg",
+    responsibilities: Array.isArray(data.responsibilities) ? data.responsibilities : [],
+    bio: content || data.bio || "",
+    bioHtml,
+  };
+}
+
+export function getAllMembers(): MemberRecord[] {
+  const membersDir = path.join(contentDirectory, "members");
+  if (!fs.existsSync(membersDir)) return [];
+  const filenames = fs.readdirSync(membersDir);
+
+  const items = filenames
+    .filter((fn) => fn.endsWith(".md"))
+    .map((filename) => {
+      const slug = filename.replace(/\.md$/, "");
+      const fullPath = path.join(membersDir, filename);
+      const fileContents = fs.readFileSync(fullPath, "utf8");
+      const { data } = matter(fileContents);
+
+      return {
+        slug,
+        memberId: data.memberId || slug,
+        name: data.name || "会員",
+        kana: data.kana || "",
+        email: data.email || "",
+        phone: data.phone || "",
+        status: data.status || "在籍（受講中）",
+        plan: data.plan || "月4回レギュラープラン",
+        classLevel: data.classLevel || "入門・基礎クラス",
+        joinedDate: data.joinedDate ? String(data.joinedDate) : "",
+        canReserveStudio: data.canReserveStudio !== false,
+        canAccessArchive: data.canAccessArchive !== false,
+        notes: data.notes || "",
+      };
+    });
+
+  // Sort by memberId ascending
+  return items.sort((a, b) => a.memberId.localeCompare(b.memberId));
+}
+
+export function getMemberById(memberId: string): MemberRecord | null {
+  const members = getAllMembers();
+  return members.find((m) => m.memberId === memberId || m.email === memberId) || null;
+}

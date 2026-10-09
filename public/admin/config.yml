@@ -60,3 +60,45 @@ collections:
           - { label: "最寄り駅・アクセス", name: "access", widget: "string", default: "想定ロケーション: 中目黒駅徒歩4分" }
           - { label: "公式LINE URL", name: "lineUrl", widget: "string", default: "https://line.me/R/ti/p/@estudio_oloroso" }
           - { label: "Instagram URL", name: "instagramUrl", widget: "string", default: "https://www.instagram.com/estudio_oloroso" }
+
+  - name: "staff"
+    label: "館員・スタジオスタッフ管理"
+    folder: "content/staff"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "スタッフ番号", name: "staffId", widget: "string", hint: "例: STF-001" }
+      - { label: "氏名", name: "name", widget: "string" }
+      - { label: "ふりがな", name: "kana", widget: "string" }
+      - { label: "役職・担当区分", name: "role", widget: "select", options: ["主宰・専任講師", "レギュラー講師", "ゲスト講師", "受付事務スタッフ", "アシスタント"] }
+      - { label: "勤務・雇用形態", name: "employmentType", widget: "select", options: ["常勤・常駐スタッフ", "シフト制パート・アルバイト", "業務委託・客員"] }
+      - { label: "在籍ステータス", name: "status", widget: "select", options: ["在籍・稼働中", "休職中", "退職"], default: "在籍・稼働中" }
+      - { label: "着任・入社日", name: "joinedDate", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD", timeFormat: false }
+      - { label: "担当曜日・シフト目安", name: "scheduleSummary", widget: "string", hint: "例: 火・木 17:00〜21:30 / 土 09:30〜18:00（常駐担当）" }
+      - { label: "連絡用メールアドレス", name: "email", widget: "string" }
+      - { label: "プロフィール写真", name: "avatar", widget: "image", required: false }
+      - { label: "主な担当業務・役割", name: "responsibilities", widget: "list" }
+      - { label: "自己紹介・プロフィール詳細", name: "bio", widget: "markdown" }
+
+  - name: "members"
+    label: "会員・受講生管理"
+    folder: "content/members"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "会員番号", name: "memberId", widget: "string", hint: "例: OLR-10023" }
+      - { label: "氏名", name: "name", widget: "string" }
+      - { label: "ふりがな", name: "kana", widget: "string" }
+      - { label: "メールアドレス", name: "email", widget: "string" }
+      - { label: "電話番号", name: "phone", widget: "string", required: false }
+      - { label: "在籍ステータス", name: "status", widget: "select", options: ["在籍（受講中）", "休会中", "退会"], default: "在籍（受講中）" }
+      - { label: "契約プラン", name: "plan", widget: "string", default: "月4回レギュラープラン（自主練習レンタル20%OFF）" }
+      - { label: "所属クラス・レベル", name: "classLevel", widget: "select", options: ["入門・基礎クラス", "初級・振付クラス", "中上級・バタ・デ・コーラ", "テクニカ専科", "個人レッスン"] }
+      - { label: "入会日", name: "joinedDate", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD", timeFormat: false }
+      - { label: "スタジオ自主練習Web予約権限", name: "canReserveStudio", widget: "boolean", default: true }
+      - { label: "レッスン動画アーカイブ視聴権限", name: "canAccessArchive", widget: "boolean", default: true }
+      - { label: "特記事項・引継ぎメモ", name: "notes", widget: "text", required: false }

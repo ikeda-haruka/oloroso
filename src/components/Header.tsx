@@ -83,6 +83,14 @@ export default function Header() {
             >
               ログイン
             </Link>
+            <span className="text-white/20">|</span>
+            <Link
+              href="/members/management"
+              className="hover:text-white transition flex items-center gap-1 text-[10px] text-[#E8C888]"
+              title="館員・受講生会員管理ポータル（CMS連携）"
+            >
+              館員・会員管理
+            </Link>
           </div>
         </div>
       </div>
@@ -234,13 +242,20 @@ export default function Header() {
                   </Link>
                 </div>
                 {/* ログイン・ログアウトへの導線 */}
-                <div className="mt-2 text-right">
+                <div className="mt-2 flex items-center justify-between text-[10px]">
+                  <Link
+                    href="/members/management"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-amber-900 font-bold hover:underline inline-flex items-center gap-0.5"
+                  >
+                    <span>館員・会員管理ポータル ›</span>
+                  </Link>
                   <Link
                     href="/members/login"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-[10px] text-amber-900 font-medium hover:underline inline-flex items-center gap-0.5"
+                    className="text-gray-600 hover:underline inline-flex items-center gap-0.5"
                   >
-                    <span>受講生ログイン画面へ ›</span>
+                    <span>会員ログイン ›</span>
                   </Link>
                 </div>
               </div>

@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Sparkles, CheckCircle2, Heart, Award, Music, Shield, ArrowRight, Star, ExternalLink, Users, Utensils, ShoppingBag } from "lucide-react";
+import { Sparkles, CheckCircle2, Heart, Award, Music, Shield, ArrowRight, Star, ExternalLink, Users, Utensils, ShoppingBag, Briefcase, Clock, Mail } from "lucide-react";
 import type { Metadata } from "next";
+import { getAllStaff } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "スタジオ紹介・講師プロフィール",
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const staffList = getAllStaff();
   // 当スタジオ受講生への独自インタビュー（※参考元・他サイトの流用を行わないスタジオ独自作成）
   const testimonials = [
     {
@@ -168,6 +170,79 @@ export default function AboutPage() {
                   </li>
                 </ul>
               </div>
+            </div>
+          </div>
+
+          {/* スタッフ・館員紹介（CMS連携） */}
+          <div className="mt-16 pt-12 border-t border-gray-200 space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div>
+                <span className="text-xs font-bold text-[#801336] tracking-widest uppercase">
+                  Studio Staff & Instructors
+                </span>
+                <h3 className="font-serif-jp text-xl sm:text-2xl font-bold text-[#1C1917] mt-1">
+                  スタジオ運営を支える館員・講師陣
+                </h3>
+                <p className="text-xs text-gray-600 mt-1">
+                  安心してレッスン・自主練習に打ち込めるよう、受付事務スタッフが常駐しサポートいたします。
+                </p>
+              </div>
+              <Link
+                href="/members/management"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#801336] hover:text-[#C5A059] bg-[#FAF7F2] border border-gray-200 px-3 py-1.5 rounded-lg shrink-0 self-start sm:self-auto"
+              >
+                <span>館員・会員管理ポータル</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {staffList.map((st) => (
+                <div
+                  key={st.staffId}
+                  className="bg-[#FAF7F2] rounded-2xl p-6 border border-gray-200 space-y-3 flex flex-col justify-between"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <span className="text-[10px] font-bold text-[#801336] uppercase bg-white border border-[#801336]/20 px-2 py-0.5 rounded-md">
+                          {st.role}
+                        </span>
+                        <h4 className="font-serif-jp text-lg font-bold text-gray-900 mt-1">
+                          {st.name}
+                        </h4>
+                        <p className="text-[11px] text-gray-500 font-sans">{st.kana}</p>
+                      </div>
+                      <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                        {st.employmentType}
+                      </span>
+                    </div>
+
+                    <p className="text-xs text-gray-700 leading-relaxed line-clamp-3">
+                      {st.bio}
+                    </p>
+
+                    {st.responsibilities.length > 0 && (
+                      <div className="pt-2 border-t border-gray-200/60">
+                        <div className="text-[11px] font-bold text-gray-800 mb-1">主な担当:</div>
+                        <ul className="text-[11px] text-gray-600 space-y-0.5 list-disc list-inside">
+                          {st.responsibilities.slice(0, 3).map((r, i) => (
+                            <li key={i} className="truncate">{r}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="pt-3 border-t border-gray-200/60 flex items-center justify-between text-[11px] text-gray-500">
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3 h-3 text-gray-400" />
+                      <span className="truncate max-w-[180px]">{st.scheduleSummary || "シフト常駐"}</span>
+                    </span>
+                    <span className="text-[10px] font-mono text-gray-400">{st.staffId}</span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

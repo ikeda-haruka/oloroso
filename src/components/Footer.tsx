@@ -109,6 +109,11 @@ export default function Footer() {
                   › 会員ログイン
                 </Link>
               </li>
+              <li>
+                <Link href="/members/management" className="hover:text-white transition flex items-center gap-1.5 text-amber-200 text-[11px] font-semibold">
+                  › 館員・会員管理ポータル（CMS）
+                </Link>
+              </li>
             </ul>
           </div>
 
